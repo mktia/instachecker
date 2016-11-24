@@ -7,28 +7,36 @@
 	<![endif]-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="input">
+	<meta name="description" content="自動解析でInstagramのフォロー・フォロワー管理を楽にするアプリ InstaChecker">
 	<!-- OGP -->
 	<meta property="og:type" content="website">
-	<meta property="og:description" content="input">
-	<meta property="og:title" content="input">
-	<meta property="og:url" content="input">
-	<meta property="og:image" content="input">
-	<meta property="og:site_name" content="input">
+	<meta property="og:description" content="自動解析でInstagramのフォロー・フォロワー管理を楽にするアプリ InstaChecker">
+	<meta property="og:title" content="InstaChecker">
+	<meta property="og:url" content="{{app_url}}">
+	<!-- <meta property="og:image" content="input"> -->
+	<meta property="og:site_name" content="InstaChecker">
 	<meta property="og:locale" content="ja_JP">
 	<!-- /OGP -->
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="input select">
-	<meta name="twitter:description" content="input">
-	<meta name="twitter:title" content="input">
-	<meta name="twitter:url" content="input">
-	<meta name="twitter:image" content="input">
+	<meta name="twitter:description" content="自動解析でInstagramのフォロー・フォロワー管理を楽にするアプリ InstaChecker">
+	<meta name="twitter:title" content="InstaChecker">
+	<meta name="twitter:url" content="{{app_url}}">
+	<!-- <meta name="twitter:image" content="input">
 	<meta name="twitter:domain" content="input">
 	<meta name="twitter:creator" content="@input">
-	<meta name="twitter:site" content="@input">
+	<meta name="twitter:site" content="@input"> -->
 	<!-- /Twitter Card -->
-	<!-- google analytics tag -->
-	<!-- adsense tag -->
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-87972162-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
 	<title>InstaChecker</title>
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<style>
@@ -79,6 +87,13 @@
 	.en {
 		color: #aaa;
 	}
+	.pc-ads {
+		margin: 0 auto;
+		width: 672px;
+	}
+	.sp-ads {
+		display: none;
+	}
 	#start {
 		font-weight: bold;
 		text-align: center;
@@ -101,6 +116,14 @@
 		header {
 			margin: 0;
 		}
+		.pc-ads {
+			display: none;
+		}
+		.sp-ads {
+			display: block;
+			margin: 0 auto;
+			width: 300px;
+		}
 		#title {
 			width: 100%;
 		}
@@ -122,7 +145,7 @@
 	<div id="main">
 		<section>
 			<h2>Welcome to InstaChecker!</h2>
-			<p>InstaChecker (インスタチェッカー) はフォロー・フォロワー管理に特化した Web アプリケーションです。</p>
+			<p><strong>InstaChecker</strong> (インスタチェッカー) はフォロー・フォロワー管理に特化した Web アプリケーションです。</p>
 			<p class="en">- InstaChecker is the web application to manage friends and followers efficiently.</p>
 			<p>あなたはボタンを押すだけで構いません。</p>
 			<p class="en">- All you need to do is pushing the button.</p>
@@ -133,18 +156,47 @@
 		<a class="button" href="{{url}}">解析開始</a>
 		<br>
 		<p style="line-height: 0; text-align: center;">スポンサーリンク</p>
-		<div style="background: #ccc; height: 300px; margin: auto; text-align: center; width: 336px;">
-			<br>
-			<br>
-			<p>広告？</p>
-			<p>PC:(300*336)*2</p>
-			<p>smartphone:300*336</p>
-			<p>or responsive</p>
+		<table class="pc-ads">
+			<tr>
+				<td>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- under-contents -->
+					<ins class="adsbygoogle"
+						 style="display:inline-block;width:336px;height:280px"
+						 data-ad-client="ca-pub-7611852587780285"
+						 data-ad-slot="2549446453"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</td>
+				<td>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- under-contents -->
+					<ins class="adsbygoogle"
+						 style="display:inline-block;width:336px;height:280px"
+						 data-ad-client="ca-pub-7611852587780285"
+						 data-ad-slot="2549446453"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</td>
+			</tr>
+		</table>
+		<div class="sp-ads">
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- under-contents-sp -->
+			<ins class="adsbygoogle"
+				 style="display:inline-block;width:300px;height:250px"
+				 data-ad-client="ca-pub-7611852587780285"
+				 data-ad-slot="9095507652"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
 		</div>
 	</div>
 	<footer>
-		<p><a href="">footer1</a> | <a href="">footer2</a> | <a href="">footer3</a> | <a href="">お問い合わせ</a></p>
-		<p>Copyright&copy; <a href="">InstaChecker</a> All rights reserved.</p>
+		<!-- <p><a href="">footer1</a> | <a href="">footer2</a> | <a href="">footer3</a> | <a href="">お問い合わせ</a></p> -->
+		<p>Copyright&copy; <a href="{{app_url}}">InstaChecker</a> All rights reserved.</p>
 	</footer>
 </body>
 </html>
