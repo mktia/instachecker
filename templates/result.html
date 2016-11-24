@@ -1,0 +1,199 @@
+<html>
+<head>
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> 
+	<![endif]-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="input">
+	<!-- OGP -->
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="input">
+	<meta property="og:title" content="input">
+	<meta property="og:url" content="input">
+	<meta property="og:image" content="input">
+	<meta property="og:site_name" content="input">
+	<meta property="og:locale" content="ja_JP">
+	<!-- /OGP -->
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="input select">
+	<meta name="twitter:description" content="input">
+	<meta name="twitter:title" content="input">
+	<meta name="twitter:url" content="input">
+	<meta name="twitter:image" content="input">
+	<meta name="twitter:domain" content="input">
+	<meta name="twitter:creator" content="@input">
+	<meta name="twitter:site" content="@input">
+	<!-- /Twitter Card -->
+	<!-- google analytics tag -->
+	<!-- adsense tag -->
+	<title>Result | InstaChecker</title>
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<style>
+	@font-face {
+		font-family: 'Billabong';
+		font-style: normal;
+		font-weight: normal;
+		src: local('Billabong'), url('../static/Billabong.woff') format('woff');
+	}
+	body {
+		background-color: #fafafa;
+		font-family: 'Ubuntu', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'YuGothic', 'Hiragino Kaku Gothic Pro', sans-serif;
+		overflow-x: hidden;
+		margin: auto;
+		width: 800px;
+	}
+	footer, footer a {
+		color: #777;
+		margin-top: 40px;
+		text-align: center;
+		text-decoration: none;
+	}
+	header {
+		background-color: #fff;
+		border-bottom: 1px solid #dbdbdb;
+		margin: -25px -410px 0;
+	}
+	section {
+		background-color: #fff;
+		border: 1px solid #efefef;
+		margin: 20px 0;
+		padding: 10px;
+	}
+	section h2 {
+		text-align: center;
+	}
+	.button {
+		background-color: #3f729b;
+		color: #fff;
+		display: block;
+		font-size: 18px;
+		margin: auto;
+		padding: 8px;
+		text-align: center;
+		text-decoration: none;
+		width: 120px;
+	}
+	.en {
+		color: #aaa;
+	}
+	#start {
+		font-weight: bold;
+		text-align: center;
+	}
+	#title {
+		margin: auto;
+		width: 1100px;
+	}
+	#title h1 {
+		font-family: Billabong;
+		font-size: 38px;
+		font-weight: normal;
+		padding-top: 25px;		
+	}
+	/* this page only*/
+	.card {
+		border: 1px solid #dbdbdb;
+		border-radius: 5px;
+		display: block;
+		font-size: 20px;
+		height: 54px;
+		margin: 5px 0 5px;
+		width: 300px;
+	}
+	.card img {
+	    border-radius: 30px;
+		float: left;
+		height: 44px;
+		margin: 5px 8px;
+		width: 44px;
+	}
+	.result {
+		margin-bottom: 40px;
+	}
+	.result a {
+		text-decoration: none;
+	}
+	.user_name {
+		color: #555;
+		font-size: 22px;
+		font-weight: bold;
+		margin: 8px 60px;
+	}
+	/* smartphone or tablet */
+	@media screen and (max-width: 1100px) {
+		body {
+			width: initial;
+		}
+		header {
+			margin: 0;
+		}
+		#title {
+			width: 100%;
+		}
+		#title p {
+			padding-left: 10pz;
+		}
+	}
+	</style>
+</head>
+<body>
+	<header>
+		<div id="title">
+			<div>
+				<img src="../static/logo.png" style="float: left; margin: 25px; width: 38px;">
+				<h1>InstaChecker</h1>
+			</div>
+		</div>
+	</header>
+	<div id="main">
+		<section>
+			<h2>実行結果</h2>
+			<div class="result">
+				<h3>片思いしているユーザー一覧</h3>
+				{% if num_not_fd != 0 %}
+					{% for i in range(num_not_fd) %}
+						<a class="card" href="http://www.instagram.com/{{not_fd[i]}}/" target="_blank"><img src="{{img_not_fd[i]}}"><p class="user_name">{{not_fd[i]}}</p></a>
+					{% endfor %}
+				{% else %}
+					<p>あなたが片思いしているユーザーはいませんでした。</p>
+				{% endif %}
+			</div>
+			<div class="result">
+				<h3>片思いされているユーザー一覧</h3>
+				{% if num_not_fs != 0 %}
+					{% for i in range(num_not_fs) %}
+						<a class="card" href="http://www.instagram.com/{{not_fs[i]}}/" target="_blank"><img src="{{img_not_fs[i]}}"><p class="user_name">{{not_fs[i]}}</p></a>
+					{% endfor %}
+				{% else %}
+					<p>あなたに片思いしているユーザーはいませんでした。</p>
+				{% endif %}
+			</div>
+			<div class="result">
+				<h3>両思い中のユーザー一覧</h3>
+				{% if num_ff != 0 %}
+					{% for i in range(num_ff) %}
+						<a class="card" href="http://www.instagram.com/{{ff[i]}}/" target="_blank"><img src="{{img_ff[i]}}"><p class="user_name">{{ff[i]}}</p></a>
+					{% endfor %}
+				{% else %}
+					<p>両思い中のユーザーはいませんでした。</p>
+				{% endif %}
+			</div>
+		</section>
+		<p style="line-height: 0; text-align: center;">スポンサーリンク</p>
+		<div style="background: #ccc; height: 300px; margin: auto; text-align: center; width: 336px;">
+			<br>
+			<br>
+			<p>広告？</p>
+			<p>PC:(300*336)*2</p>
+			<p>smartphone:300*336</p>
+			<p>or responsive</p>
+		</div>
+	</div>
+	<footer>
+		<p><a href="">footer1</a> | <a href="">footer2</a> | <a href="">footer3</a> | <a href="">お問い合わせ</a></p>
+		<p>Copyright&copy; <a href="">InstaChecker</a> All rights reserved.</p>
+	</footer>
+</body>
+</html>
