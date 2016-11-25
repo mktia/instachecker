@@ -4,7 +4,7 @@ import os
 import pycurl
 import urllib
 import urllib2
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, url_for
 from StringIO import StringIO
 
 app = Flask(__name__)
@@ -118,6 +118,12 @@ def exe():
 		print('You are followed by all the user you follow.')
 		
 	return render_template('result.html', img_ff=img_follows_and_followed, img_not_fd=img_not_followed_by, img_not_fs=img_not_follows, ff=follows_and_followed, not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs, num_not_fd=num_not_fd, app_url=app_url)
+
+@app.route('/logout')
+def restart():
+	redirect(url_for('https://www.instagram.com/accounts/logout'))
+	url = base_url + auth_url
+	return render_template('index.html', url=url, app_url=app_url)
 	
 if __name__ == '__main__':
 	app.run()
