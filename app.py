@@ -121,7 +121,7 @@ def exe():
 
 @app.route('/logout')
 def restart():
-	redirect(url_for('https://www.instagram.com/accounts/logout'))
+	redirect('https://www.instagram.com/accounts/logout')
 	url = base_url + auth_url
 	return render_template('index.html', url=url, app_url=app_url)
 	
