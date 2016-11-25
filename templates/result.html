@@ -150,6 +150,17 @@
 		color: #000;
 		text-decoration: none;
 	}
+	#logout {
+		border: 1px solid #999;
+		border-radius: 5px;
+		color: #999;
+		display: block;
+	    margin: -65px 150px 39px auto;
+		padding: 3px;
+		text-align: center;
+		text-decoration: none;
+		width: 70px;
+	}
 	/* smartphone or tablet */
 	@media screen and (max-width: 1100px) {
 		body {
@@ -166,11 +177,14 @@
 			margin: 0 auto;
 			width: 300px;
 		}
+		#logout {
+			margin: -65px 5px 39px auto;
+		}
 		#title {
 			width: 100%;
 		}
 		#title p {
-			padding-left: 10pz;
+			padding-left: 10px;
 		}
 	}
 	</style>
@@ -189,6 +203,9 @@
 				<img src="../static/logo.png" style="float: left; margin: 25px; width: 38px;">
 				<h1><a href="{{app_url}}">InstaChecker</a></h1>
 			</div>
+			<!-- <div id="logout"> -->
+				<a id="logout" href="{{app_url}}/logout">Log out</a>
+			<!-- </div> -->
 		</div>
 	</header>
 	<div id="main">
