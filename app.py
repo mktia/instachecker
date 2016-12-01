@@ -124,6 +124,10 @@ def restart():
 	redirect('https://www.instagram.com/accounts/logout')
 	url = base_url + auth_url
 	return render_template('index.html', url=url, app_url=app_url)
+
+@app.route('/privacy')
+def privacy():
+	return render_template('privacy.html', app_url=app_url)
 	
 if __name__ == '__main__':
 	app.run()
