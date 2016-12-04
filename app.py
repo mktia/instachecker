@@ -9,10 +9,19 @@ from StringIO import StringIO
 
 app = Flask(__name__)
 
-app_url = 'https://instachecker.herokuapp.com'
+setting = {
+	'url' : 'https://instachecker.herokuapp.com',
+	'name' : 'InstaChecker',
+	'description' : u'片思い・被片思いアカウントを自動解析し、フォロー・フォロワー管理を楽にするアプリ InstaChecker',
+	'short_description' : u'片思い・被片思いを自動でチェック'
+}
+
+app_url = setting['url']
 app_redirect_url = app_url + '/result'
-client_id = os.environ['client_id']
-client_secret = os.environ['client_secret']
+# client_id = os.environ['client_id']
+# client_secret = os.environ['client_secret']
+client_id = ''
+client_secret=''
 access_token = ''
 
 base_url = 'https://api.instagram.com'
@@ -21,7 +30,7 @@ auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_r
 @app.route('/')
 def auth():
 	url = base_url + auth_url
-	return render_template('index.html', url=url, app_url=app_url)
+	return render_template('index.html', url=url, info=setting)
 
 @app.route('/result')
 def exe():
@@ -117,17 +126,17 @@ def exe():
 	else:
 		print('You are followed by all the user you follow.')
 		
-	return render_template('result.html', img_ff=img_follows_and_followed, img_not_fd=img_not_followed_by, img_not_fs=img_not_follows, ff=follows_and_followed, not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs, num_not_fd=num_not_fd, app_url=app_url)
+	return render_template('result.html', img_ff=img_follows_and_followed, img_not_fd=img_not_followed_by, img_not_fs=img_not_follows, ff=follows_and_followed, not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs, num_not_fd=num_not_fd, info=setting)
 
 @app.route('/logout')
 def restart():
 	redirect('https://www.instagram.com/accounts/logout')
 	url = base_url + auth_url
-	return render_template('index.html', url=url, app_url=app_url)
+	return render_template('index.html', url=url, info=setting)
 
 @app.route('/privacy')
 def privacy():
-	return render_template('privacy.html', app_url=app_url)
+	return render_template('privacy.html', info=setting)
 	
 if __name__ == '__main__':
 	app.run()
