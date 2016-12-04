@@ -18,10 +18,8 @@ setting = {
 
 app_url = setting['url']
 app_redirect_url = app_url + '/result'
-# client_id = os.environ['client_id']
-# client_secret = os.environ['client_secret']
-client_id = ''
-client_secret=''
+client_id = os.environ['client_id']
+client_secret = os.environ['client_secret']
 access_token = ''
 
 base_url = 'https://api.instagram.com'
