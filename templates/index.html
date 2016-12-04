@@ -6,25 +6,25 @@
 	<![endif]-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="片思い・被片思いアカウントを自動解析し、フォロー・フォロワー管理を楽にするアプリ InstaChecker">
+	<meta name="description" content="{{info['description']}}">
 	<!-- OGP -->
 	<meta property="og:type" content="website">
-	<meta property="og:description" content="片思い・被片思いアカウントを自動解析し、フォロー・フォロワー管理を楽にするアプリ InstaChecker">
-	<meta property="og:title" content="InstaChecker">
-	<meta property="og:url" content="{{app_url}}">
+	<meta property="og:description" content="{{info['description']}}">
+	<meta property="og:title" content="{{info['name']}}">
+	<meta property="og:url" content="{{info['url']}}">
 	<!-- <meta property="og:image" content="input"> -->
-	<meta property="og:site_name" content="InstaChecker">
+	<meta property="og:site_name" content="{{info['name']}}">
 	<meta property="og:locale" content="ja_JP">
 	<!-- /OGP -->
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="input select">
-	<meta name="twitter:description" content="片思い・被片思いアカウントを自動解析し、フォロー・フォロワー管理を楽にするアプリ InstaChecker">
-	<meta name="twitter:title" content="InstaChecker">
-	<meta name="twitter:url" content="{{app_url}}">
-	<!-- <meta name="twitter:image" content="input">
-	<meta name="twitter:domain" content="input">
-	<meta name="twitter:creator" content="@input">
-	<meta name="twitter:site" content="@input"> -->
+	<meta name="twitter:description" content="{{info['description']}}">
+	<meta name="twitter:title" content="{{info['name']}}">
+	<meta name="twitter:url" content="{{info['url']}}">
+	<!-- <meta name="twitter:image" content="input"> -->
+	<meta name="twitter:domain" content="{{info['url']}}">
+	<meta name="twitter:creator" content="@instachecker">
+	<meta name="twitter:site" content="@instachecker">
 	<!-- /Twitter Card -->
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -36,111 +36,9 @@
 	  ga('send', 'pageview');
 
 	</script>
-	<title>InstaChecker | 片思い・被片思いを自動でチェック</title>
-	<link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
-	<style>
-	@font-face {
-		font-family: 'Billabong';
-		font-style: normal;
-		font-weight: normal;
-		src: local('Billabong'), url('../static/Billabong.woff') format('woff');
-	}
-	body {
-		background-color: #fafafa;
-		font-family: 'Maven Pro', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'YuGothic', 'Hiragino Kaku Gothic Pro', sans-serif;
-		overflow-x: hidden;
-		margin: auto;
-		width: 800px;
-	}
-	footer, footer a {
-		color: #777;
-		margin-top: 40px;
-		text-align: center;
-		text-decoration: none;
-	}
-	h1 a {
-		color: #000;
-		text-decoration: none;
-	}
-	header {
-		background-color: #fff;
-		border-bottom: 1px solid #dbdbdb;
-		margin: -25px -410px 0;
-	}
-	section {
-		background-color: #fff;
-		border: 1px solid #efefef;
-		margin: 20px 0;
-		padding: 10px;
-	}
-	section h2 {
-		text-align: center;
-	}
-	.ad-cell {
-		display: table-cell;
-		padding: 0 5px;
-	}
-	.button {
-		background-color: #3f729b;
-		color: #fff;
-		display: block;
-		font-size: 18px;
-		margin: auto;
-		padding: 8px;
-		text-align: center;
-		text-decoration: none;
-		width: 120px;
-	}
-	.en {
-		color: #aaa;
-		margin: 0 0 2em;
-	}
-	.pc-ads {
-		display: table;
-		margin: 0 auto;
-		width: 700px;
-	}
-	.sp-ads {
-		display: none;
-	}
-	#start {
-		font-weight: bold;
-		text-align: center;
-	}
-	#title {
-		margin: auto;
-		width: 1100px;
-	}
-	#title h1 {
-		font-family: Billabong;
-		font-size: 38px;
-		font-weight: normal;
-		padding-top: 25px;		
-	}
-	/* smartphone or tablet */
-	@media screen and (max-width: 1100px) {
-		body {
-			width: initial;
-		}
-		header {
-			margin: 0;
-		}
-		.pc-ads {
-			display: none;
-		}
-		.sp-ads {
-			display: block;
-			margin: 0 auto;
-			width: 300px;
-		}
-		#title {
-			width: 100%;
-		}
-		#title p {
-			padding-left: 10pz;
-		}
-	}
-	</style>
+	<title>{{info['name']}} | {{info['short_description']}}</title>
+	<link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Open+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="/static/style.css" type="text/css">
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script>
 	  (adsbygoogle = window.adsbygoogle || []).push({
@@ -153,16 +51,16 @@
 	<header>
 		<div id="title">
 			<div>
-				<img src="../static/logo.png" style="float: left; margin: 25px; width: 38px;">
-				<h1><a href="{{app_url}}">InstaChecker</a></h1>
+				<img src="../static/logo.png">
+				<h1><a href="{{info['url']}}">{{info['name']}}</a></h1>
 			</div>
 		</div>
 	</header>
 	<div id="main">
 		<section>
-			<h2>Welcome to InstaChecker!</h2>
-			<p><strong>InstaChecker</strong> (インスタチェッカー) はフォロー・フォロワー管理に特化した Web アプリケーションです。</p>
-			<p class="en">- InstaChecker is the web application to manage friends and followers efficiently.</p>
+			<h2 style="font-family: 'Aref Ruqaa', serif; font-weight: normal;">Welcome to {{info['name']}}!</h2>
+			<p><strong>{{info['name']}}</strong> (インスタチェッカー) はフォロー・フォロワー管理に特化した Web アプリケーションです。</p>
+			<p class="en">- {{info['name']}} is the web application to manage friends and followers efficiently.</p>
 			<p>このアプリを使えば、片思いアカウント、両思いアカウントを簡単に確認することができます。</p>
 			<p class="en">- You can easily check your relationship.</p>
 			<p>あなたはボタンを押すだけで構いません。</p>
@@ -211,8 +109,8 @@
 		</div>
 	</div>
 	<footer>
-		<p><a href="{{app_url}}/privacy">プライバシーポリシー</a></p>
-		<p>&copy;<a href="{{app_url}}">InstaChecker</a> All rights reserved.</p>
+		<p><a href="{{info['url']}}/privacy">Privacy Policy</a></p>
+		<p>&copy;<a href="{{info['url']}}">{{info['name']}}</a> All rights reserved.</p>
 	</footer>
 </body>
 </html>
