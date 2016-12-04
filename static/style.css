@@ -1,0 +1,107 @@
+@font-face {
+	font-family: 'Billabong';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Billabong'), url('../static/Billabong.woff') format('woff');
+}
+body {
+	background-color: #fafafa;
+	font-family: 'Open Sans', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'YuGothic', 'Hiragino Kaku Gothic Pro', serif;
+	overflow-x: hidden;
+	margin: auto;
+	width: 800px;
+}
+footer, footer a {
+	color: #777;
+	margin-top: 40px;
+	text-align: center;
+	text-decoration: none;
+}
+h1 a {
+	color: #000;
+	text-decoration: none;
+}
+header {
+	background-color: #fff;
+	border-bottom: 1px solid #dbdbdb;
+	margin: -25px -410px 0;
+}
+section {
+	background-color: #fff;
+	border: 1px solid #efefef;
+	margin: 20px 0;
+	padding: 10px;
+}
+section h2 {
+	text-align: center;
+}
+.ad-cell {
+	display: table-cell;
+	padding: 0 5px;
+}
+.button {
+	background-color: #3f729b;
+	color: #fff;
+	display: block;
+	font-size: 18px;
+	margin: auto;
+	padding: 8px;
+	text-align: center;
+	text-decoration: none;
+	width: 120px;
+}
+.en {
+	color: #aaa;
+	margin: 0 0 2em;
+}
+.pc-ads {
+	display: table;
+	margin: 0 auto;
+	width: 700px;
+}
+.sp-ads {
+	display: none;
+}
+#start {
+	font-weight: bold;
+	text-align: center;
+}
+#title {
+	margin: auto;
+	width: 1100px;
+}
+#title img {
+	 float: left;
+	 margin: 19px;
+	 width: 38px;"
+}
+#title h1 {
+	font-family: Billabong;
+	font-size: 38px;
+	font-weight: normal;
+	height: 38px;
+	padding-top: 19px;		
+}
+/* smartphone or tablet */
+@media screen and (max-width: 1100px) {
+	body {
+		width: initial;
+	}
+	header {
+		margin: 0;
+	}
+	.pc-ads {
+		display: none;
+	}
+	.sp-ads {
+		display: block;
+		margin: 0 auto;
+		width: 300px;
+	}
+	#title {
+		width: 100%;
+	}
+	#title p {
+		padding-left: 10pz;
+	}
+}
