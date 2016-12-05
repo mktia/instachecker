@@ -1,0 +1,71 @@
+<html lang="ja">
+<head>
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> 
+	<![endif]-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="{{info['description']}}">
+	<!-- OGP -->
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="{{info['description']}}">
+	<meta property="og:title" content="{{info['name']}}">
+	<meta property="og:url" content="{{info['url']}}">
+	<!-- <meta property="og:image" content="input"> -->
+	<meta property="og:site_name" content="{{info['name']}}">
+	<meta property="og:locale" content="ja_JP">
+	<!-- /OGP -->
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="input select">
+	<meta name="twitter:description" content="{{info['description']}}">
+	<meta name="twitter:title" content="{{info['name']}}">
+	<meta name="twitter:url" content="{{info['url']}}">
+	<!-- <meta name="twitter:image" content="input"> -->
+	<meta name="twitter:domain" content="{{info['url']}}">
+	<meta name="twitter:creator" content="@instachecker">
+	<meta name="twitter:site" content="@instachecker">
+	<!-- /Twitter Card -->
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-87972162-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+	<title>Privacy Policy | {{info['name']}}</title>
+	<link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Open+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="../static/style.css" type="text/css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-7611852587780285",
+		enable_page_level_ads: true
+	  });
+	</script>
+</head>
+<body>
+	<header>
+		<div id="title">
+			<div>
+				<img src="../static/logo.png">
+				<h1><a href="{{info['url']}}">{{info['name']}}</a></h1>
+			</div>
+		</div>
+	</header>
+	<div id="main">
+		<section>
+			<h2 style="font-family: 'Aref Ruqaa', serif; font-weight: normal;">Contact Us</h2>
+			<p>Mail: <a href="mailto:multidirection3@gmail.com">multidirection3@gmail.com</a></p>
+			<p>Twitter: <a href="http://twitter.com/instachecker">instachecker</a></p>
+			<p>Instagram: <a href="http://www.instagram.com/instachecker_official">instachecker_official</a></p>
+		</section>
+	<footer class="mobile-small">
+		<p><a href="{{info['url']}}/privacy">Privacy Policy</a> | <a href="{{info['url']}}/contact">Contact Us</a></p>
+		<p>&copy;<a href="{{info['url']}}">{{info['name']}}</a> All rights reserved.</p>
+	</footer>
+</body>
+</html>

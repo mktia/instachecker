@@ -136,5 +136,9 @@ def restart():
 def privacy():
 	return render_template('privacy.html', info=setting)
 	
+@app.route('/contact')
+def contact():
+	return render_template('contact.html', info=setting)
+	
 if __name__ == '__main__':
 	app.run()
