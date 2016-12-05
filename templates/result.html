@@ -21,8 +21,8 @@
 	<meta name="twitter:description" content="{{info['description']}}">
 	<meta name="twitter:title" content="{{info['name']}}">
 	<meta name="twitter:url" content="{{info['url']}}">
-	<!-- <meta name="twitter:image" content="input">
-	<meta name="twitter:domain" content="input"> -->
+	<!-- <meta name="twitter:image" content="input"> -->
+	<meta name="twitter:domain" content="{{info['url']}}">
 	<meta name="twitter:creator" content="@instachecker">
 	<meta name="twitter:site" content="@instachecker">
 	<!-- /Twitter Card -->
@@ -38,7 +38,8 @@
 	</script>
 	<title>Result | {{info['name']}}</title>
 	<link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Open+Sans" rel="stylesheet">
-	<link rel="stylesheet" href="/static/style.css" type="text/css">
+	<link rel="stylesheet" href="../static/style.css" type="text/css">
+	<link rel="stylesheet" href="../static/icon-style.css" type="text/css">
 	<style>
 	/* this page only*/
 	.card {
@@ -121,6 +122,7 @@
 			<p id="index"><a href="#not_fs">片思いしてる</a> | <a href="#not_fd">片思いされてる</a> | <a href="#ff">両思い</a></p>
 			<div class="result">
 				<h3 id="not_fs">片思いしているユーザー一覧</h3>
+				<p class="en">- You are following but not followed.</p>
 				{% if num_not_fd != 0 %}
 					{% for i in range(num_not_fd) %}
 						<a class="card" href="http://www.instagram.com/{{not_fd[i]}}/" target="_blank"><img src="{{img_not_fd[i]}}"><p class="user_name">{{not_fd[i]}}</p></a>
@@ -131,6 +133,7 @@
 			</div>
 			<div class="result">
 				<h3 id="not_fd">片思いされているユーザー一覧</h3>
+				<p class="en">- You are not following but followed.</p>
 				{% if num_not_fs != 0 %}
 					{% for i in range(num_not_fs) %}
 						<a class="card" href="http://www.instagram.com/{{not_fs[i]}}/" target="_blank"><img src="{{img_not_fs[i]}}"><p class="user_name">{{not_fs[i]}}</p></a>
@@ -141,6 +144,7 @@
 			</div>
 			<div class="result">
 				<h3 id="ff">両思い中のユーザー一覧</h3>
+				<p class="en">- You are following and followed.</p>
 				{% if num_ff != 0 %}
 					{% for i in range(num_ff) %}
 						<a class="card" href="http://www.instagram.com/{{ff[i]}}/" target="_blank"><img src="{{img_ff[i]}}"><p class="user_name">{{ff[i]}}</p></a>
@@ -148,6 +152,14 @@
 				{% else %}
 					<p>両思い中のユーザーはいませんでした。</p>
 				{% endif %}
+			</div>
+		</section>
+		<section>
+			<p>Instagram の<strong>相互フォローチェック</strong>ができる、数少ないサイトです。友だちに教えてあげませんか？</p>
+			<div class="sns">
+				<a class="btn-tw" href="http://twitter.com/share?text={{info['description']}}&url={{info['url']}}" target="blank" rel="nofollow"><span class="sns-icon icon-twitter"></span><span class="btn-text">twitter</span></a>
+				<a class="btn-fb" href="http://www.facebook.com/sharer/sharer.php?u={{info['url']}}&t={{info['description']}}" target="blank" rel="nofollow"><span class="sns-icon icon-facebook"></span><span class="btn-text">facebook</span></a>
+				<a class="btn-ln" href="http://line.me/R/msg/text/?{{info['description']}}%0D%0A{{info['url']}}" target="blank" rel="nofollow"><span class="sns-icon icon-line"></span><span class="btn-text">line</span></a>
 			</div>
 		</section>
 		<p style="line-height: 0; text-align: center;">スポンサーリンク</p>

@@ -38,7 +38,8 @@
 	</script>
 	<title>{{info['name']}} | {{info['short_description']}}</title>
 	<link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Open+Sans" rel="stylesheet">
-	<link rel="stylesheet" href="/static/style.css" type="text/css">
+	<link rel="stylesheet" href="../static/style.css" type="text/css">
+	<link rel="stylesheet" href="../static/icon-style.css" type="text/css">	
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script>
 	  (adsbygoogle = window.adsbygoogle || []).push({
@@ -68,10 +69,18 @@
 			<p>快適なインスタグラムライフを手に入れましょう！</p>
 			<p class="en">- Let's start comfortable life on Instagram!</p>
 		</section>
+		<section>
+			<p>Instagram の<strong>相互フォローチェック</strong>ができる、数少ないサイトです。友だちに教えてあげませんか？</p>
+			<div class="sns">
+				<a class="btn-tw" href="http://twitter.com/share?text={{info['description']}}&url={{info['url']}}" target="blank" rel="nofollow"><span class="sns-icon icon-twitter"></span><span class="btn-text">twitter</span></a>
+				<a class="btn-fb" href="http://www.facebook.com/sharer/sharer.php?u={{info['url']}}&t={{info['description']}}" target="blank" rel="nofollow"><span class="sns-icon icon-facebook"></span><span class="btn-text">facebook</span></a>
+				<a class="btn-ln" href="http://line.me/R/msg/text/?{{info['description']}}%0D%0A{{info['url']}}" target="blank" rel="nofollow"><span class="sns-icon icon-line"></span><span class="btn-text">line</span></a>
+			</div>
+		</section>
 		<p id="start">さあ、はじめよう！</p>
 		<a class="button" href="{{url}}">解析開始</a>
 		<br>
-		<p style="line-height: 0; text-align: center;">スポンサーリンク</p>
+		<p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
 		<div class="pc-ads">
 			<div class="ad-cell">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -108,8 +117,8 @@
 			</script>
 		</div>
 	</div>
-	<footer>
-		<p><a href="{{info['url']}}/privacy">Privacy Policy</a></p>
+	<footer class="mobile-small">
+		<p><a href="{{info['url']}}/privacy">Privacy Policy</a> | <a href="{{info['url']}}/contact">Contact us</a></p>
 		<p>&copy;<a href="{{info['url']}}">{{info['name']}}</a> All rights reserved.</p>
 	</footer>
 </body>

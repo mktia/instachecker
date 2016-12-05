@@ -39,6 +39,29 @@ section h2 {
 	display: table-cell;
 	padding: 0 5px;
 }
+.btn-fb, .btn-tw {
+	color: #fff;
+	display: block;
+	font-size: 20px;
+	float: left;
+	padding: 5px;
+	margin-left: 3px;
+	margin-right: 3px;
+	text-decoration: none;
+}
+.btn-fb {
+	background-color: #3b5998;
+}
+.btn-ln {
+	display: none;
+	background-color: #009b00;
+}
+.btn-text {
+	margin: 3px;
+}
+.btn-tw {
+	background-color: #1da1f2;
+}
 .button {
 	background-color: #3f729b;
 	color: #fff;
@@ -61,6 +84,12 @@ section h2 {
 }
 .sp-ads {
 	display: none;
+}
+.sns {
+	height: 50px;
+}
+.sns-icon {
+	margin: 3px 3px 2px;
 }
 #start {
 	font-weight: bold;
@@ -93,6 +122,9 @@ section h2 {
 	.pc-ads {
 		display: none;
 	}
+	.mobile-small {
+		font-size: 13px;
+	}
 	.sp-ads {
 		display: block;
 		margin: 0 auto;
@@ -103,5 +135,17 @@ section h2 {
 	}
 	#title p {
 		padding-left: 10pz;
+	}
+}
+@media screen and (max-width: 768px) {
+	.btn-ln {
+		color: #fff;
+		display: block;
+		font-size: 20px;
+		float: left;
+		padding: 5px;
+		margin-left: 3px;
+		margin-right: 3px;
+		text-decoration: none;
 	}
 }
