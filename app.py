@@ -80,7 +80,7 @@ def exe():
 	num_follows = len(follows)
 	num_followed_by = len(followed_by)
 	
-	print('Follows:' + num_follows + ', Followers:' + num_followed_by)
+	print('Follows:' + str(num_follows) + ', Followers:' + str(num_followed_by))
 	
 	follows_and_followed = []
 	not_follows = []
