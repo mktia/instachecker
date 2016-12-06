@@ -66,17 +66,20 @@ def exe():
 			imgs[data[i]['username']] = data[i]['profile_picture']
 	except Exception as e:
 		print(e, 'error to get follows')
-	while(pagination != {}):
-		api = urllib2.urlopen(next_url)
-		load = json.loads(api.read())
-		data = load['data']
-		pagination = load['pagination']
-		print pagination
+	while(True):
 		if(pagination != {}):
-			next_url = pagination['next_url']
-		for i in range(len(data)):
-			follows.append(data[i]['username'])
-			imgs[data[i]['username']] = data[i]['profile_picture']
+			break
+		else:
+			api = urllib2.urlopen(next_url)
+			load = json.loads(api.read())
+			data = load['data']
+			pagination = load['pagination']
+			print pagination
+			if(pagination != {}):
+				next_url = pagination['next_url']
+			for i in range(len(data)):
+				follows.append(data[i]['username'])
+				imgs[data[i]['username']] = data[i]['profile_picture']
 	print follows
 	
 	try:
@@ -92,15 +95,18 @@ def exe():
 			imgs[data[i]['username']] = data[i]['profile_picture']
 	except Exception as e:
 		print(e, 'error to get followed by')	
-	while(pagination != {}):
-		api = urllib2.urlopen(next_url)
-		load = json.loads(api.read())
-		data = load['data']
-		pagination = load['pagination']
+	while(True):
 		if(pagination != {}):
-			next_url = pagination['next_url']
-		for i in range(len(data)):
-			followed_by.append(data[i]['username'])
+			break
+		else:
+			api = urllib2.urlopen(next_url)
+			load = json.loads(api.read())
+			data = load['data']
+			pagination = load['pagination']
+			if(pagination != {}):
+				next_url = pagination['next_url']
+			for i in range(len(data)):
+				followed_by.append(data[i]['username'])
 			imgs[data[i]['username']] = data[i]['profile_picture']
 	print followed_by
 	
