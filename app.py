@@ -56,8 +56,9 @@ def exe():
 	
 	try:
 		follows = []
-		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/follows?access_token=' + access_token + '&count=-1')
+		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/follows?access_token=' + access_token)
 		load = json.loads(api.read())
+		print load
 		data = load['data']
 		for i in range(len(data)):
 			follows.append(data[i]['username'])
@@ -68,7 +69,7 @@ def exe():
 	
 	try:
 		followed_by = []
-		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/followed-by?access_token=' + access_token + '&count=-1')
+		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/followed-by?access_token=' + access_token)
 		load = json.loads(api.read())
 		data = load['data']
 		for i in range(len(data)):
