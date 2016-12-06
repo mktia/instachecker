@@ -54,30 +54,28 @@ def exe():
 	load = json.loads(res)
 	access_token = load['access_token']
 	
-	for k in range(2):
-		try:
-			follows = []
-			api = urllib2.urlopen('https://api.instagram.com/v1/users/self/follows?access_token=' + access_token)
-			load = json.loads(api.read())
-			data = load['data']
-			for i in range(len(data)):
-				follows.append(data[i]['username'])
-				imgs[data[i]['username']] = data[i]['profile_picture']
-		except Exception as e:
-			print(e, 'error to get follows')
+	try:
+		follows = []
+		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/follows?access_token=' + access_token + '&count=-1')
+		load = json.loads(api.read())
+		data = load['data']
+		for i in range(len(data)):
+			follows.append(data[i]['username'])
+			imgs[data[i]['username']] = data[i]['profile_picture']
+	except Exception as e:
+		print(e, 'error to get follows')
 	print follows
 	
-	for k in range(2):
-		try:
-			followed_by = []
-			api = urllib2.urlopen('https://api.instagram.com/v1/users/self/followed-by?access_token=' + access_token)
-			load = json.loads(api.read())
-			data = load['data']
-			for i in range(len(data)):
-				followed_by.append(data[i]['username'])
-				imgs[data[i]['username']] = data[i]['profile_picture']
-		except Exception as e:
-			print(e, 'error to get followed by')
+	try:
+		followed_by = []
+		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/followed-by?access_token=' + access_token + '&count=-1')
+		load = json.loads(api.read())
+		data = load['data']
+		for i in range(len(data)):
+			followed_by.append(data[i]['username'])
+			imgs[data[i]['username']] = data[i]['profile_picture']
+	except Exception as e:
+		print(e, 'error to get followed by')
 	print followed_by
 	
 	num_follows = len(follows)
