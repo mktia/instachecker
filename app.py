@@ -77,8 +77,8 @@ def exe():
 			for i in range(len(data)):
 				follows.append(data[i]['username'])
 				imgs[data[i]['username']] = data[i]['profile_picture']
-		# except Exception as e:
-			# print(e, 'error to get follows (while)')
+		except Exception as e:
+			print(e, 'error to get follows (while)')
 	print follows
 	
 	try:
