@@ -33,7 +33,6 @@ def auth():
 @app.route('/result')
 def exe():
 	code = request.args.get('code')
-	print code
 	info = StringIO()
 	curl = pycurl.Curl()
 	curl.setopt(pycurl.URL, 'https://api.instagram.com/oauth/access_token')
@@ -67,15 +66,19 @@ def exe():
 	except Exception as e:
 		print(e, 'error to get follows')
 	try:
-		while(next_url != None):
-			api = urllib2.urlopen(next_url)
-			load = json.loads(api.read())
-			data = load['data']
-			pagination = load['pagination']
-			next_url = pagination['next_url']
-			for i in range(len(data)):
-				follows.append(data[i]['username'])
-				imgs[data[i]['username']] = data[i]['profile_picture']
+		while(True):
+			if(next_url == None):
+				break
+			else:
+				print next_url
+				api = urllib2.urlopen(next_url)
+				load = json.loads(api.read())
+				data = load['data']
+				pagination = load['pagination']
+				next_url = pagination['next_url']
+				for i in range(len(data)):
+					follows.append(data[i]['username'])
+					imgs[data[i]['username']] = data[i]['profile_picture']
 	except Exception as e:
 		print(e)
 	print follows
@@ -93,17 +96,21 @@ def exe():
 	except Exception as e:
 		print(e, 'error to get followed by')
 	try:	
-		while(next_url != None):
-			api = urllib2.urlopen(next_url)
-			load = json.loads(api.read())
-			data = load['data']
-			pagination = load['pagination']
-			next_url = pagination['next_url']
-			for i in range(len(data)):
-				followed_by.append(data[i]['username'])
-				imgs[data[i]['username']] = data[i]['profile_picture']
+		while(True):
+			if(next_url == None):
+				break
+			else:
+				print next_url
+				api = urllib2.urlopen(next_url)
+				load = json.loads(api.read())
+				data = load['data']
+				pagination = load['pagination']
+				next_url = pagination['next_url']
+				for i in range(len(data)):
+					followed_by.append(data[i]['username'])
+					imgs[data[i]['username']] = data[i]['profile_picture']
 	except Exception as e:
-		print(e,)
+		print(e)
 	print followed_by
 	
 	num_follows = len(follows)
