@@ -66,20 +66,20 @@ def exe():
 			imgs[data[i]['username']] = data[i]['profile_picture']
 	except Exception as e:
 		print(e, 'error to get follows')
-	try:
-		while(pagination != None):
-			print next_url
-			api = urllib2.urlopen(next_url)
-			load = json.loads(api.read())
-			data = load['data']
-			pagination = load['pagination']
-			if(pagination != None):
-				next_url = pagination['next_url']
-			for i in range(len(data)):
-				follows.append(data[i]['username'])
-				imgs[data[i]['username']] = data[i]['profile_picture']
-	except Exception as e:
-		print(e)
+	# try:
+	while(pagination != None):
+		print next_url
+		api = urllib2.urlopen(next_url)
+		load = json.loads(api.read())
+		data = load['data']
+		pagination = load['pagination']
+		if(pagination != None):
+			next_url = pagination['next_url']
+		for i in range(len(data)):
+			follows.append(data[i]['username'])
+			imgs[data[i]['username']] = data[i]['profile_picture']
+	# except Exception as e:
+		# print(e)
 	print follows
 	
 	try:
@@ -95,20 +95,20 @@ def exe():
 			imgs[data[i]['username']] = data[i]['profile_picture']
 	except Exception as e:
 		print(e, 'error to get followed by')
-	try:	
-		while(pagination != None):
-			print next_url
-			api = urllib2.urlopen(next_url)
-			load = json.loads(api.read())
-			data = load['data']
-			pagination = load['pagination']
-			if(pagination != None):
-				next_url = pagination['next_url']
-			for i in range(len(data)):
-				followed_by.append(data[i]['username'])
-				imgs[data[i]['username']] = data[i]['profile_picture']
-	except Exception as e:
-		print(e)
+	# try:	
+	while(pagination != None):
+		print next_url
+		api = urllib2.urlopen(next_url)
+		load = json.loads(api.read())
+		data = load['data']
+		pagination = load['pagination']
+		if(pagination != None):
+			next_url = pagination['next_url']
+		for i in range(len(data)):
+			followed_by.append(data[i]['username'])
+			imgs[data[i]['username']] = data[i]['profile_picture']
+	# except Exception as e:
+		# print(e)
 	print followed_by
 	
 	num_follows = len(follows)
