@@ -67,7 +67,7 @@ def exe():
 	except Exception as e:
 		print(e, 'error to get follows')
 	# try:
-	while(pagination != None):
+	while(pagination != {}):
 		print next_url
 		api = urllib2.urlopen(next_url)
 		load = json.loads(api.read())
