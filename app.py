@@ -67,7 +67,6 @@ def exe():
 	except Exception as e:
 		print(e, 'error to get follows')
 	while(pagination != {}):
-		print next_url
 		api = urllib2.urlopen(next_url)
 		load = json.loads(api.read())
 		data = load['data']
@@ -94,7 +93,6 @@ def exe():
 	except Exception as e:
 		print(e, 'error to get followed by')	
 	while(pagination != {}):
-		print next_url
 		api = urllib2.urlopen(next_url)
 		load = json.loads(api.read())
 		data = load['data']
