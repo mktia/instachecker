@@ -68,6 +68,7 @@ def exe():
 		print(e, 'error to get follows')
 	while(next_url != None):
 		try:
+			print next_url
 			api = urllib2.urlopen(next_url)
 			load = json.loads(api.read())
 			data = load['data']
@@ -76,8 +77,8 @@ def exe():
 			for i in range(len(data)):
 				follows.append(data[i]['username'])
 				imgs[data[i]['username']] = data[i]['profile_picture']
-		except Exception as e:
-			print(e, 'error to get follows (while)')
+		# except Exception as e:
+			# print(e, 'error to get follows (while)')
 	print follows
 	
 	try:
