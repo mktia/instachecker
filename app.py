@@ -73,6 +73,7 @@ def exe():
 		load = json.loads(api.read())
 		data = load['data']
 		pagination = load['pagination']
+		print pagination
 		if(pagination != None):
 			next_url = pagination['next_url']
 		for i in range(len(data)):
