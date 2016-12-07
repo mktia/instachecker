@@ -12,8 +12,8 @@ app = Flask(__name__)
 setting = {
 	'url' : 'https://instachecker.herokuapp.com',
 	'name' : 'InstaChecker',
-	'description' : u'片思い・被片思いアカウントを自動解析し、フォロー・フォロワー管理を楽にするアプリ InstaChecker',
-	'short_description' : u'片思い・被片思いを自動でチェック'
+	'description' : u'片思い・相互フォローを自動解析してアカウント管理を楽にするアプリ InstaChecker',
+	'short_description' : u'片思い・相互フォローを自動でチェック'
 }
 
 app_url = setting['url']
