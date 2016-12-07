@@ -58,6 +58,7 @@ def exe():
 		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/follows?access_token=' + access_token)
 		load = json.loads(api.read())
 		data = load['data']
+		print data
 		pagination = load['pagination']
 		if(pagination != {}):
 			next_url = pagination['next_url']
@@ -87,7 +88,6 @@ def exe():
 		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/followed-by?access_token=' + access_token)
 		load = json.loads(api.read())
 		data = load['data']
-		print data
 		pagination = load['pagination']
 		if(pagination != None):
 			next_url = pagination['next_url']
