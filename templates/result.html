@@ -122,6 +122,7 @@
 			<p id="index"><a href="#not_fs">片思いしてる</a> | <a href="#not_fd">片思いされてる</a> | <a href="#ff">両思い</a></p>
 			<div class="result">
 				<h3 id="not_fs">片思いしているユーザー一覧</h3>
+				<p>あなたは{{num_not_fd}}人のユーザーに片思いしています。</p>
 				<p class="en">- You are following but not followed.</p>
 				{% if num_not_fd != 0 %}
 					{% for i in range(num_not_fd) %}
@@ -133,6 +134,7 @@
 			</div>
 			<div class="result">
 				<h3 id="not_fd">片思いされているユーザー一覧</h3>
+				<p>あなたに{{num_not_fs}}人のユーザーが片思いしています。</p>
 				<p class="en">- You are not following but followed.</p>
 				{% if num_not_fs != 0 %}
 					{% for i in range(num_not_fs) %}
@@ -144,6 +146,7 @@
 			</div>
 			<div class="result">
 				<h3 id="ff">両思い中のユーザー一覧</h3>
+				<p>あなたは{{num_ff}}人のユーザーと両思いです。</p>
 				<p class="en">- You are following and followed.</p>
 				{% if num_ff != 0 %}
 					{% for i in range(num_ff) %}
