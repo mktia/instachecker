@@ -88,7 +88,7 @@ def exe():
 		load = json.loads(api.read())
 		data = load['data']
 		pagination = load['pagination']
-		if(pagination != None):
+		if(pagination != {}):
 			next_url = pagination['next_url']
 		for i in range(len(data)):
 			followed_by.append(data[i]['username'])
