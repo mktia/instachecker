@@ -58,9 +58,7 @@ def exe():
 		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/follows?access_token=' + access_token)
 		load = json.loads(api.read())
 		data = load['data']
-		print data
 		pagination = load['pagination']
-		print pagination
 		if(pagination != {}):
 			next_url = pagination['next_url']
 		for i in range(len(data)):
@@ -69,7 +67,7 @@ def exe():
 	except Exception as e:
 		print(e, 'error to get follows')
 	while(True):
-		if(pagination != {}):
+		if(pagination == {}):
 			break
 		else:
 			api = urllib2.urlopen(next_url)
@@ -98,7 +96,7 @@ def exe():
 	except Exception as e:
 		print(e, 'error to get followed by')	
 	while(True):
-		if(pagination != {}):
+		if(pagination == {}):
 			break
 		else:
 			api = urllib2.urlopen(next_url)
