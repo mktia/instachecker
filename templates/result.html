@@ -71,6 +71,9 @@
 		color: #000;
 		text-decoration: none;
 	}
+	#list {
+		padding: 0 100px;
+	}
 	#logout {
 		border: 1px solid #999;
 		border-radius: 5px;
@@ -84,6 +87,9 @@
 	}
 	/* smartphone or tablet */
 	@media screen and (max-width: 1100px) {
+		#list {
+			padding: 10px;
+		}
 		#logout {
 			margin: -59px 5px 23px auto;
 		}
@@ -118,10 +124,10 @@
 		</div>
 	</header>
 	<div id="main">
-		<section style="padding: 0 100px;">
+		<section id="list">
 			<h2>実行結果</h2>
 			<p id="index"><a href="#not_fs">片思いしてる</a> | <a href="#not_fd">片思いされてる</a> | <a href="#ff">両思い</a></p>
-			<div class="result">
+			<div class="result" style="margin-bottom: 40px;">
 				<h3 id="not_fs">片思いしているユーザー：{{num_not_fd}}人</h3>
 				<p class="en">- You are following but not followed.</p>
 				{% if num_not_fd != 0 %}
@@ -133,7 +139,7 @@
 				{% endif %}
 			</div>
 			<p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
-			<div class="pc-ads" style="width: 500px;">
+			<div class="pc-ads" style="width: 336px;">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<!-- under-contents -->
 				<ins class="adsbygoogle"
