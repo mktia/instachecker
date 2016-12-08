@@ -53,8 +53,10 @@ def exe():
 		imgs = {}
 		load = json.loads(res)
 		access_token = load['access_token']
-	except:
-		print(Exception)
+	except Exception as e:
+		print(e)
+	
+	pagination = {}
 	
 	try:
 		follows = []
@@ -67,8 +69,8 @@ def exe():
 		for i in range(len(data)):
 			follows.append(data[i]['username'])
 			imgs[data[i]['username']] = data[i]['profile_picture']
-	except:
-		print(Exception, 'error to get follows')
+	except Exception as e:
+		print(e, 'error to get follows')
 	while(True):
 		if(pagination == {}):
 			break
@@ -96,8 +98,8 @@ def exe():
 		for i in range(len(data)):
 			followed_by.append(data[i]['username'])
 			imgs[data[i]['username']] = data[i]['profile_picture']
-	except:
-		print(Exception, 'error to get followed by')	
+	except Exception as e:
+		print(e, 'error to get followed by')	
 	while(True):
 		if(pagination == {}):
 			break
