@@ -134,8 +134,11 @@ def exe():
 				break
 		else:
 			not_followed_by.append(follows[i])
-			tmp_img = imgs[follows[i]]
-			img_not_followed_by.append(tmp_img)
+			try:
+				tmp_img = imgs[follows[i]]
+				img_not_followed_by.append(tmp_img)
+			except Exception as e:
+				print(e)
 	num_ff = len(follows_and_followed)
 	num_not_fd = len(not_followed_by)
 	if num_not_fd != 0:
@@ -150,8 +153,11 @@ def exe():
 				break
 		else:
 			not_follows.append(followed_by[i])
-			tmp_img = imgs[followed_by[i]]
-			img_not_follows.append(tmp_img)
+			try:
+				tmp_img = imgs[followed_by[i]]
+				img_not_follows.append(tmp_img)
+			except Exception as e:
+				print(e)
 	num_not_fs = len(not_follows)
 	if num_not_fs != 0:
 		for i in not_follows:		
