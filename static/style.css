@@ -149,3 +149,8 @@ section h2 {
 		text-decoration: none;
 	}
 }
+@media screen and (max-width: 320px) {
+	.btn-text {
+		display: none;
+	}
+}
