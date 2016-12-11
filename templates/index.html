@@ -58,6 +58,14 @@
 			</div>
 		</div>
 	</header>
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8&appId=555469271313885";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
 	<div id="main">
 		<section>
 			<h2 style="font-family: 'Aref Ruqaa', serif; font-weight: normal;">Welcome to {{info['name']}}!</h2>
@@ -77,6 +85,7 @@
 				<a class="btn-fb" href="http://www.facebook.com/sharer/sharer.php?u={{info['url']}}&t={{info['description']}}" target="blank" rel="nofollow"><span class="sns-icon icon-facebook"></span><span class="btn-text">facebook</span></a>
 				<a class="btn-ln" href="http://line.me/R/msg/text/?{{info['description']}}%0D%0A{{info['url']}}" target="blank" rel="nofollow"><span class="sns-icon icon-line"></span><span class="btn-text">line</span></a>
 			</div>
+			<div class="fb-page" data-href="https://www.facebook.com/instachecker/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/instachecker/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/instachecker/">InstaChecker</a></blockquote></div>
 		</section>
 		<p id="start">さあ、はじめよう！</p>
 		<a class="button" href="{{url}}">解析開始</a>
