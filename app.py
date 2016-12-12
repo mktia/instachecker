@@ -13,7 +13,7 @@ setting = {
 	'url' : 'https://instachecker.herokuapp.com',
 	'name' : 'InstaChecker',
 	'description' : u'片思い・相互フォローを自動解析してアカウント管理を楽にするアプリ InstaChecker',
-	'short_description' : u'片思い・相互フォローを自動でチェック'
+	'short_description' : u'Instagramのフォローチェックが簡単に。'
 }
 
 app_url = setting['url']
