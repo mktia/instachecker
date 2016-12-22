@@ -60,7 +60,7 @@ def exe():
 		num += 1
 		load = json.loads(res)
 		if(load['error_type'] == 'OAuthException'):
-			re_get = urllib.urlopen(re_url + auth_url).open()
+			re_get = urllib.urlopen(re_url + auth_url).read()
 			print re_get
 			code = request.args.get('code')
 		else:
