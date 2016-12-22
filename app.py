@@ -29,6 +29,7 @@ auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_r
 temp_url = base_url
 re_url = 'https://www.instagram.com'
 base_url = re_url
+print base_url
 
 @app.route('/')
 def auth():
