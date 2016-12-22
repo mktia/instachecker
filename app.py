@@ -65,8 +65,7 @@ def exe():
 	
 	try:
 		follows = []
-		#
-		api = urllib2.urlopen(re_url + '/v1/users/self/follows?access_token=' + access_token)
+		api = urllib2.urlopen(base_url + '/v1/users/self/follows?access_token=' + access_token)
 		load = json.loads(api.read())
 		data = load['data']
 		pagination = load['pagination']
