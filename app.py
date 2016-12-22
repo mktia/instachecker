@@ -59,11 +59,15 @@ def exe():
 		
 		num += 1
 		load = json.loads(res)
-		if(load['error_type'] == 'OAuthException'):
-			re_get = urllib.urlopen(re_url + auth_url).read()
-			print re_get
-			code = request.args.get('code')
-		else:
+		try:
+			if(load['error_type'] == 'OAuthException'):
+				re_get = urllib.urlopen(re_url + auth_url).read()
+				print re_get
+				code = request.args.get('code')
+			else:
+				break
+		except Exception as e:
+			print(e, 'error to loop')
 			break
 	
 	try:
