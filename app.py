@@ -26,8 +26,9 @@ base_url = 'https://api.instagram.com'
 auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
 
 #redirect 302
-temp_url = 'https://www.instagram.com'
-base_url = temp_url
+temp_url = base_url
+re_url = 'https://www.instagram.com'
+base_url = re_url
 
 @app.route('/')
 def auth():
@@ -52,6 +53,9 @@ def exe():
 	curl.perform()
 	res = info.getvalue()
 	print res
+	
+	#reset redirect 302
+	base_url = temp_url
 	
 	try:
 		imgs = {}
