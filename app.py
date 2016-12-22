@@ -31,7 +31,8 @@ re_url = 'https://www.instagram.com'
 
 @app.route('/')
 def auth():
-	url = base_url + auth_url
+	#redirect 302
+	url = re_url + auth_url
 	return render_template('index.html', url=url, info=setting)
 
 @app.route('/result')
