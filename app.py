@@ -60,8 +60,8 @@ def exe():
 		num += 1
 		load = json.loads(res)
 		try:
-			print num
 			if(load['error_type'] == 'OAuthException'):
+				print('OAuth error:' + str(num))
 				re_get = urllib.urlopen(re_url + auth_url).read()
 				print re_get
 				code = request.args.get('code')
@@ -196,7 +196,8 @@ def exe():
 
 @app.route('/logout')
 def restart():
-	redirect('https://www.instagram.com/accounts/logout')
+	#redirect('https://www.instagram.com/accounts/logout')
+	urllib.urlopen('https://www.instagram.com/accounts/logout')
 	url = base_url + auth_url
 	return render_template('index.html', url=url, info=setting)
 
