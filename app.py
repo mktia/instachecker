@@ -29,7 +29,6 @@ auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_r
 temp_url = base_url
 re_url = 'https://www.instagram.com'
 base_url = re_url
-print base_url
 
 @app.route('/')
 def auth():
@@ -41,7 +40,7 @@ def exe():
 	code = request.args.get('code')
 	info = StringIO()
 	curl = pycurl.Curl()
-	curl.setopt(pycurl.URL, base_url + '/oauth/access_token')
+	curl.setopt(pycurl.URL, re_url + '/oauth/access_token')
 	param = urllib.urlencode({
 		'client_id':client_id,
 		'client_secret':client_secret,
