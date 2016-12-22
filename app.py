@@ -22,22 +22,24 @@ client_id = os.environ['client_id']
 client_secret = os.environ['client_secret']
 access_token = ''
 
-temp_url = 'https://www.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
-#auth_url = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
+base_url = 'https://api.instagram.com'
+auth_url = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
 
 #redirect 302
-auth_url = temp_url
+temp_url = 'https://www.instagram.com'
+base_url = temp_url
 
 @app.route('/')
 def auth():
-	return render_template('index.html', url=auth_url, info=setting)
+	url = base_url + auth_url
+	return render_template('index.html', url=url, info=setting)
 
 @app.route('/result')
 def exe():
 	code = request.args.get('code')
 	info = StringIO()
 	curl = pycurl.Curl()
-	curl.setopt(pycurl.URL, 'https://api.instagram.com/oauth/access_token')
+	curl.setopt(pycurl.URL, base_url + '/oauth/access_token')
 	param = urllib.urlencode({
 		'client_id':client_id,
 		'client_secret':client_secret,
@@ -62,7 +64,7 @@ def exe():
 	
 	try:
 		follows = []
-		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/follows?access_token=' + access_token)
+		api = urllib2.urlopen(base_url + '/v1/users/self/follows?access_token=' + access_token)
 		load = json.loads(api.read())
 		data = load['data']
 		pagination = load['pagination']
@@ -91,7 +93,7 @@ def exe():
 	
 	try:
 		followed_by = []
-		api = urllib2.urlopen('https://api.instagram.com/v1/users/self/followed-by?access_token=' + access_token)
+		api = urllib2.urlopen(base_url + '/v1/users/self/followed-by?access_token=' + access_token)
 		load = json.loads(api.read())
 		data = load['data']
 		pagination = load['pagination']
