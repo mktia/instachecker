@@ -23,7 +23,7 @@ client_secret = os.environ['client_secret']
 access_token = ''
 
 base_url = 'https://api.instagram.com'
-auth_url = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
+auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
 
 #redirect 302
 temp_url = 'https://www.instagram.com'
