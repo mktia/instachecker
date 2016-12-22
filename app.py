@@ -28,7 +28,6 @@ auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_r
 #redirect 302
 temp_url = base_url
 re_url = 'https://www.instagram.com'
-base_url = re_url
 
 @app.route('/')
 def auth():
@@ -40,7 +39,8 @@ def exe():
 	code = request.args.get('code')
 	info = StringIO()
 	curl = pycurl.Curl()
-	curl.setopt(pycurl.URL, base_url + '/oauth/access_token')
+	#redirect 302
+	curl.setopt(pycurl.URL, re_url + '/oauth/access_token')
 	param = urllib.urlencode({
 		'client_id':client_id,
 		'client_secret':client_secret,
@@ -54,9 +54,6 @@ def exe():
 	res = info.getvalue()
 	print res
 	
-	#reset redirect 302
-	base_url = temp_url
-	
 	try:
 		imgs = {}
 		load = json.loads(res)
@@ -68,7 +65,8 @@ def exe():
 	
 	try:
 		follows = []
-		api = urllib2.urlopen(base_url + '/v1/users/self/follows?access_token=' + access_token)
+		#
+		api = urllib2.urlopen(re_url + '/v1/users/self/follows?access_token=' + access_token)
 		load = json.loads(api.read())
 		data = load['data']
 		pagination = load['pagination']
