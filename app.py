@@ -22,13 +22,15 @@ client_id = os.environ['client_id']
 client_secret = os.environ['client_secret']
 access_token = ''
 
-base_url = 'https://api.instagram.com'
-auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
+temp_url = 'https://www.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
+#auth_url = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
+
+#redirect 302
+auth_url = temp_url
 
 @app.route('/')
 def auth():
-	url = base_url + auth_url
-	return render_template('index.html', url=url, info=setting)
+	return render_template('index.html', url=auth_url, info=setting)
 
 @app.route('/result')
 def exe():
