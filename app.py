@@ -37,23 +37,33 @@ def auth():
 
 @app.route('/result')
 def exe():
+	num = 0
 	code = request.args.get('code')
 	info = StringIO()
 	curl = pycurl.Curl()
-	#redirect 302
-	curl.setopt(pycurl.URL, re_url + '/oauth/access_token')
-	param = urllib.urlencode({
-		'client_id':client_id,
-		'client_secret':client_secret,
-		'grant_type':'authorization_code',
-		'redirect_uri':app_redirect_url,
-		'code':code
-	})
-	curl.setopt(pycurl.POSTFIELDS, param)
-	curl.setopt(curl.WRITEFUNCTION, info.write)
-	curl.perform()
-	res = info.getvalue()
-	print res
+	while(num < 5):
+		#redirect 302
+		curl.setopt(pycurl.URL, re_url + '/oauth/access_token')
+		param = urllib.urlencode({
+			'client_id':client_id,
+			'client_secret':client_secret,
+			'grant_type':'authorization_code',
+			'redirect_uri':app_redirect_url,
+			'code':code
+		})
+		curl.setopt(pycurl.POSTFIELDS, param)
+		curl.setopt(curl.WRITEFUNCTION, info.write)
+		curl.perform()
+		res = info.getvalue()
+		print res
+		
+		num += 1
+		if(res['code'] == 400):
+			re_get = urllib.urlopen(re_url + auth_url).open()
+			print re_get
+			code = request.args.get('code')
+		else:
+			break
 	
 	try:
 		imgs = {}
