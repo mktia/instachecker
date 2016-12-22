@@ -40,7 +40,7 @@ def exe():
 	code = request.args.get('code')
 	info = StringIO()
 	curl = pycurl.Curl()
-	curl.setopt(pycurl.URL, re_url + '/oauth/access_token')
+	curl.setopt(pycurl.URL, base_url + '/oauth/access_token')
 	param = urllib.urlencode({
 		'client_id':client_id,
 		'client_secret':client_secret,
@@ -62,7 +62,7 @@ def exe():
 		load = json.loads(res)
 		access_token = load['access_token']
 	except Exception as e:
-		print(e)
+		print(e, 'access token error')
 	
 	pagination = {}
 	
