@@ -6,6 +6,7 @@
 }
 body {
 	background-color: #fafafa;
+	color: #444;
 	font-family: 'Open Sans', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'YuGothic', 'Hiragino Kaku Gothic Pro', serif;
 	overflow-x: hidden;
 	margin: auto;
@@ -32,8 +33,14 @@ section {
 	margin: 20px 0;
 	padding: 10px;
 }
-section h2 {
+section h2, h3 {
+	margin-top: 10px;
+	margin-bottom: 20px;
 	text-align: center;
+}
+section h4 {
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
 .ad-cell {
 	display: table-cell;
