@@ -169,8 +169,8 @@ def exe():
 	num_ff = len(follows_and_followed)
 	num_not_fd = len(not_followed_by)
 	if num_not_fd != 0:
-		for i in not_followed_by:
-			print("You aren't followed by: " + i)
+		print("You aren't followed by:")
+		print(num_not_fd)
 	else:
 		print('You are followed by all the user you follow.')
 	
@@ -186,20 +186,22 @@ def exe():
 			except Exception as e:
 				print(e)
 	num_not_fs = len(not_follows)
-	if num_not_fs != 0:
-		for i in not_follows:		
-			print("You don't follow: " + i)
+	if num_not_fs != 0:	
+		print("You don't follow:")
+		print(num_not_fs)
 	else:
 		print('You are followed by all the user you follow.')
 		
 	return render_template('result.html', img_ff=img_follows_and_followed, img_not_fd=img_not_followed_by, img_not_fs=img_not_follows, ff=follows_and_followed, not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs, num_not_fd=num_not_fd, info=setting)
 
+'''
 @app.route('/logout')
 def restart():
 	#redirect('https://www.instagram.com/accounts/logout')
 	urllib.urlopen('https://www.instagram.com/accounts/logout')
 	url = base_url + auth_url
 	return render_template('index.html', url=url, info=setting)
+'''
 
 @app.route('/privacy')
 def privacy():
