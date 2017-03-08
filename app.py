@@ -2,6 +2,7 @@
 import json
 import os
 import pycurl
+import tweepy
 import urllib
 import urllib2
 from flask import Flask, render_template, request, session, redirect, url_for
@@ -59,12 +60,6 @@ def exe():
 	
 	try:
 		if(load['error_type'] == 'OAuthException'):
-			"""
-			print('OAuth error') #:' + str(num))
-			#re_get = urllib.urlopen(re_url + auth_url).read()
-			#print re_get
-			code = request.args.get('code')
-			"""
 			return(redirect(app_url))
 	except Exception as e:
 		print(e, 'error to loop')
@@ -73,6 +68,15 @@ def exe():
 		access_token = load['access_token']
 	except Exception as e:
 		print(e, 'access token error')
+	
+	tw_consumer_key = os.environ['tw_ck']
+	tw_consumer_secret = os.environ['tw_cs']
+	tw_access_token = os.environ['tw_at']
+	tw_access_token_secret = os.environ['tw_as']
+	tw_auth = tweepy.OAuthHandler(tw_consumer_key, tw_consumer_secret)
+	tw_auth.set_access_token(tw_access_token, tw_access_token_secret)
+	api = tweepy.API(tw_auth)
+	api.send_direct_message(screen_name='instachecker', text="http://www.instagram.com/"+load['user']['username'])
 	
 	imgs = {}
 	pagination = {}

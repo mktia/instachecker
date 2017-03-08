@@ -5,4 +5,5 @@ Jinja2==2.8
 MarkupSafe==0.23
 pycurl==7.43.0
 requests==2.11.1
+tweepy==3.5.0
 Werkzeug==0.11.11
