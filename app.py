@@ -41,43 +41,42 @@ def exe():
 	code = request.args.get('code')
 	info = StringIO()
 	curl = pycurl.Curl()
-	while(num < 5):
-		#redirect 302
-		curl.setopt(pycurl.URL, re_url + '/oauth/access_token')
-		param = urllib.urlencode({
-			'client_id':client_id,
-			'client_secret':client_secret,
-			'grant_type':'authorization_code',
-			'redirect_uri':app_redirect_url,
-			'code':code
-		})
-		curl.setopt(pycurl.POSTFIELDS, param)
-		curl.setopt(curl.WRITEFUNCTION, info.write)
-		curl.perform()
-		res = info.getvalue()
-		print res
-		
-		num += 1
-		load = json.loads(res)
-		try:
-			if(load['error_type'] == 'OAuthException'):
-				print('OAuth error:' + str(num))
-				re_get = urllib.urlopen(re_url + auth_url).read()
-				print re_get
-				code = request.args.get('code')
-			else:
-				break
-		except Exception as e:
-			print(e, 'error to loop')
-			break
+	
+	#redirect 302
+	curl.setopt(pycurl.URL, re_url + '/oauth/access_token')
+	param = urllib.urlencode({
+		'client_id':client_id,
+		'client_secret':client_secret,
+		'grant_type':'authorization_code',
+		'redirect_uri':app_redirect_url,
+		'code':code
+	})
+	curl.setopt(pycurl.POSTFIELDS, param)
+	curl.setopt(curl.WRITEFUNCTION, info.write)
+	curl.perform()
+	res = info.getvalue()
+	print res
+	load = json.loads(res)
 	
 	try:
-		imgs = {}
-		load = json.loads(res)
+		if(load['error_type'] == 'OAuthException'):
+			"""
+			print('OAuth error') #:' + str(num))
+			#re_get = urllib.urlopen(re_url + auth_url).read()
+			#print re_get
+			code = request.args.get('code')
+			"""
+			return(redirect(app_url))
+	except Exception as e:
+		print(e, 'error to loop')
+	
+	try:
+		#load = json.loads(res) duplicate
 		access_token = load['access_token']
 	except Exception as e:
 		print(e, 'access token error')
 	
+	imgs = {}
 	pagination = {}
 	
 	try:
