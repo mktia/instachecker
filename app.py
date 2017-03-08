@@ -37,7 +37,6 @@ def auth():
 
 @app.route('/result')
 def exe():
-	num = 0
 	code = request.args.get('code')
 	info = StringIO()
 	curl = pycurl.Curl()
@@ -71,7 +70,6 @@ def exe():
 		print(e, 'error to loop')
 	
 	try:
-		#load = json.loads(res) duplicate
 		access_token = load['access_token']
 	except Exception as e:
 		print(e, 'access token error')
@@ -100,13 +98,11 @@ def exe():
 			load = json.loads(api.read())
 			data = load['data']
 			pagination = load['pagination']
-			print pagination
 			if(pagination != {}):
 				next_url = pagination['next_url']
 			for i in range(len(data)):
 				follows.append(data[i]['username'])
 				imgs[data[i]['username']] = data[i]['profile_picture']
-	print follows
 	
 	try:
 		followed_by = []
@@ -134,7 +130,6 @@ def exe():
 			for i in range(len(data)):
 				followed_by.append(data[i]['username'])
 			imgs[data[i]['username']] = data[i]['profile_picture']
-	print followed_by
 	
 	num_follows = len(follows)
 	num_followed_by = len(followed_by)
@@ -168,8 +163,7 @@ def exe():
 	num_ff = len(follows_and_followed)
 	num_not_fd = len(not_followed_by)
 	if num_not_fd != 0:
-		print("You aren't followed by:")
-		print(num_not_fd)
+		print("You aren't followed by:" + str(num_not_fd))
 	else:
 		print('You are followed by all the user you follow.')
 	
@@ -186,8 +180,7 @@ def exe():
 				print(e)
 	num_not_fs = len(not_follows)
 	if num_not_fs != 0:	
-		print("You don't follow:")
-		print(num_not_fs)
+		print("You don't follow:" + str(num_not_fs))
 	else:
 		print('You are followed by all the user you follow.')
 		
