@@ -62,7 +62,7 @@ def exe():
 		if(load['error_type'] == 'OAuthException'):
 			return(redirect(app_url))
 	except Exception as e:
-		print(e, 'error to loop')
+		print(Exception, e, 'error to loop')
 	
 	try:
 		access_token = load['access_token']
@@ -138,7 +138,7 @@ def exe():
 	num_follows = len(follows)
 	num_followed_by = len(followed_by)
 	
-	print('Follows:' + str(num_follows) + ', Followers:' + str(num_followed_by))
+	#print('Follows:' + str(num_follows) + ', Followers:' + str(num_followed_by))
 	
 	follows_and_followed = []
 	not_follows = []
@@ -166,10 +166,12 @@ def exe():
 				print(e)
 	num_ff = len(follows_and_followed)
 	num_not_fd = len(not_followed_by)
+	"""
 	if num_not_fd != 0:
 		print("You aren't followed by:" + str(num_not_fd))
 	else:
 		print('You are followed by all the user you follow.')
+	"""
 	
 	for i in range(num_followed_by):
 		for j in range(num_follows):
@@ -183,10 +185,12 @@ def exe():
 			except Exception as e:
 				print(e)
 	num_not_fs = len(not_follows)
+	"""
 	if num_not_fs != 0:	
 		print("You don't follow:" + str(num_not_fs))
 	else:
 		print('You are followed by all the user you follow.')
+	"""
 		
 	return render_template('result.html', img_ff=img_follows_and_followed, img_not_fd=img_not_followed_by, img_not_fs=img_not_follows, ff=follows_and_followed, not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs, num_not_fd=num_not_fd, info=setting)
 
