@@ -23,7 +23,7 @@
 	<meta name="twitter:creator" content="@instachecker">
 	<meta name="twitter:site" content="@instachecker">
 	<title>{{info['name']}} インスタチェッカー | {{info['short_description']}}</title>
-	<link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Open+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link rel="stylesheet" href="../static/style.css" type="text/css">
 	<link rel="stylesheet" href="../static/icon-style.css" type="text/css">	
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -68,43 +68,34 @@
 		}(document, 'script', 'facebook-jssdk'));</script>
 	<div id="main">
 		<section>
-			<h2 style="font-family: 'Aref Ruqaa', serif; font-weight: normal;">Welcome to {{info['name']}}!</h2>
-			<p><strong>インスタチェッカー ({{info['name']}})</strong> は Instagram ユーザー向けのフォロー・フォロワー管理に特化した Web アプリケーションです。</p>
+			<div style="background: -webkit-linear-gradient(-135deg, #d82e86, #ec6b3a); color: #fafafa;
+				padding-bottom: 30px; padding-top: 30px; margin-bottom: 20px; margin-left: -10px; margin-right: -10px; margin-top: -10px; text-align: center;">
+				<h2>WELCOME TO INSTACHECKER</h2>
+				<p>フォロー・フォロワー関係を手軽にチェック</p>
+				<p>インスタグラムユーザー向け WEB アプリケーション</p>
+			</div>
+			<p>「<strong>フォローされているのかわからない</strong>...」</p>
+			<p>そんな悩みを解決すべく、ボタンを押すだけで<strong>片思い</strong>、<strong>相互フォロー</strong>などを一気にチェックできる WEB アプリが誕生しました！</p>
 			<br>
-			<h3>インスタチェッカーを使うメリット</h3>
-			<h4>１．簡単な操作</h4>
-			<p>ワンタップで片思い、片思われ、相互フォローの3つのリストを自動生成。</p>
-			<p><strong>片思いや相互フォローになっているアカウントを確認</strong>できるようになります。</p>
-			<br>
-			<h4>２．安全な利用環境</h4>
-			<p>アプリが取得するのはフォロー・フォロワーのリストのみ。</p>
-			<p>他に余計な機能は一切ついていないので、アカウント情報の流出の心配をすることなく、安心して利用できます。</p>
-			<br>
-			<h4>３．すべての端末から無料で利用可能</h4>
-			<p>インスタチェッカーはデバイスや OS の種類によって制限されません。</p>
-			<p>インターネットに接続できるなら、どの端末でもアプリを利用できます。</p>
-			<p>サービスの利用に料金は発生しないので、すべて無料でお使いいただけます。</p>
-			<br>
-			<h4>４．日本発のサービス</h4>
-			<p>アプリの開発、運営はすべて日本人が行っています。</p>
-			<p>海外のサービスを利用してトラブる心配は無用です。</p>
-			<p>※何か問題が起きたときは、<a href="{{info['url']}}/contact">お問い合わせ先</a>にご連絡をお願いします。</p>
-			<br>
-			<p>あなたもインスタチェッカーを使って、快適なインスタグラムライフを手に入れましょう！</p>
-			<br>
-			<p>{{info['name']}} is the web application to manage friends and followers efficiently.</p>
-			<p>You can easily check your relationship.</p>
-			<p>All you need to do is pushing the button.</p>
-			<p>Let's start comfortable life on Instagram!</p>
+			<p><strong>気軽に使えるシンプルさ</strong>と<strong>安全性</strong>を重要視して設計しました。</p>
+			<ol>
+				<li>ボタン一つの簡単な操作</li>
+				<li>利用登録もインストールも不要</li>
+				<li>どんな端末からでも</li>
+			</ol>
+			<p>ぜひインスタチェッカーを使って、快適なインスタグラムライフを楽しんでください！</p>
 		</section>
 		<section>
-			<p>{{info['name']}} を紹介する！</p>
+			<p>周りの友達にも紹介してね！</p>
 			<div class="sns">
-				<a class="btn-tw" href="http://twitter.com/share?text={{info['description']}}&url={{info['url']}}" target="blank" rel="nofollow"><span class="sns-icon icon-twitter"></span><span class="btn-text">twitter</span></a>
-				<a class="btn-fb" href="http://www.facebook.com/sharer/sharer.php?u={{info['url']}}&t={{info['description']}}" target="blank" rel="nofollow"><span class="sns-icon icon-facebook"></span><span class="btn-text">facebook</span></a>
-				<a class="btn-ln" href="http://line.me/R/msg/text/?{{info['description']}}%0D%0A{{info['url']}}" target="blank" rel="nofollow"><span class="sns-icon icon-line"></span><span class="btn-text">line</span></a>
+				<a class="btn-tw" href="http://twitter.com/share?text={{info['description']}}&url={{info['url']}}"
+					target="blank" rel="nofollow"><span class="sns-icon icon-twitter"></span><span class="btn-text">twitter</span></a>
+				<a class="btn-fb" href="http://www.facebook.com/sharer/sharer.php?u={{info['url']}}&t={{info['description']}}"
+					target="blank" rel="nofollow"><span class="sns-icon icon-facebook"></span><span class="btn-text">facebook</span></a>
+				<a class="btn-ln" href="http://line.me/R/msg/text/?{{info['description']}}%0D%0A{{info['url']}}"
+					target="blank" rel="nofollow"><span class="sns-icon icon-line"></span><span class="btn-text">line</span></a>
 			</div>
-		</section> 
+		</section>
 		<br>
 		<p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
 		<div class="pc-ads">
@@ -147,13 +138,25 @@
 		<a class="button" href="{{url}}">解析開始</a>
 		<br>
 		<div style="padding-bottom: 10px; text-align: center;">
-			<div class="fb-page" data-href="https://www.facebook.com/instachecker/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/instachecker/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/instachecker/">InstaChecker</a></blockquote></div>
+			<div class="fb-page" data-href="https://www.facebook.com/instachecker/" data-tabs="timeline"　data-small-header="false"
+				data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+				<blockquote cite="https://www.facebook.com/instachecker/" class="fb-xfbml-parse-ignore">
+				<a href="https://www.facebook.com/instachecker/">InstaChecker</a>
+				</blockquote>
+			</div>
 		</div>
 		<section>
+			<h2>What's INSTACHECKER?</h2>
+			<p>{{info['name']}} is the web application to manage friends and followers efficiently.</p>
+			<p>You can easily check your relationship.</p>
+			<p>All you need to do is pushing the button.</p>
+			<p>Let's enjoy comfortable life on Instagram!</p>
+		</section>
+		<section>
 			<h2>不具合・バグ報告</h2>
-			<p>iOS 端末において、インスタグラムアプリ内のブラウザで開くと読み込みに失敗し、フォローチェックができません。</p>
-			<p>また、稀にインスタグラム側での認証に失敗し、アプリをご利用いただけないことがあります。</p>
+			<p>稀にインスタグラムの認証に失敗し、アプリをご利用いただけないことがあります。</p>
 			<p>不具合・バグは発見し次第修正していますが、インスタグラムの仕様により解決できないものが一部ございますので、ご了承ください。</p>
+			<p>ご質問・不具合などのお問い合わせは <a href="{{info['url']}}/contact">Contact Us</a> からお願いいたします。</p>
 		</section>
 	</div>
 	<footer class="mobile-small">
