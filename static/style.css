@@ -103,7 +103,7 @@ section h4 {
 	margin: 3px 3px 2px;
 }
 .welcome {
-	background: -webkit-linear-gradient(-135deg, #d82e86, #ec6b3a);
+	background: linear-gradient(-135deg, #d82e86, #ec6b3a);
 	color: #fafafa;
 	padding-bottom: 30px;
 	padding-left: 10px;
