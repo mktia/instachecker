@@ -103,9 +103,10 @@ section h4 {
 	margin: 3px 3px 2px;
 }
 .welcome {
-	background: -webkit-linear-gradient(-135deg, #d82e86, #ec6b3a);
 	color: #fafafa;
 	padding-bottom: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
 	padding-top: 30px;
 	margin-bottom: 20px;
 	margin-left: -70px;
@@ -173,7 +174,7 @@ section h4 {
 }
 @media screen and (max-width: 425px) {
 	body {
-		font-size: 14px;
+		font-size: 13px;
 	}
 	section{
 		padding-left: 10px;
