@@ -32,7 +32,10 @@ section {
 	background-color: #fff;
 	border: 1px solid #efefef;
 	margin: 20px 0;
-	padding: 10px;
+	padding-bottom: 10px;
+	padding-left: 70px;
+	padding-right: 70px;
+	padding-top: 10px;
 }
 section h2, h3 {
 	margin-top: 10px;
@@ -99,6 +102,17 @@ section h4 {
 .sns-icon {
 	margin: 3px 3px 2px;
 }
+.welcome {
+	background: -webkit-linear-gradient(-135deg, #d82e86, #ec6b3a);
+	color: #fafafa;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	margin-bottom: 20px;
+	margin-left: -70px;
+	margin-right: -70px;
+	margin-top: -10px;
+	text-align: center;
+}
 #start {
 	font-weight: bold;
 	text-align: center;
@@ -155,6 +169,19 @@ section h4 {
 		margin-left: 3px;
 		margin-right: 3px;
 		text-decoration: none;
+	}
+}
+@media screen and (max-width: 425px) {
+	body {
+		font-size: 14px;
+	}
+	section{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.welcome {
+		margin-left: -10px;
+		margin-right: -10px;
 	}
 }
 @media screen and (max-width: 320px) {
