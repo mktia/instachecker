@@ -14,7 +14,7 @@ setting = {
 	'url' : 'https://instachecker.herokuapp.com',
 	'name' : 'InstaChecker',
 	'description' : u'インスタグラムで片思いや相互フォローをチェックできるアプリ InstaChecker',
-	'short_description' : u'Instagramのフォローチェックが簡単に。'
+	'short_description' : u'インスタグラムのフォローチェックが簡単に。'
 }
 
 app_url = setting['url']
@@ -27,13 +27,13 @@ base_url = 'https://api.instagram.com'
 auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
 
 #redirect 302
-temp_url = base_url
 re_url = 'https://www.instagram.com'
+temp_url = base_url
 
 @app.route('/')
 def auth():
 	#redirect 302
-	url = re_url + auth_url
+	url = temp_url + auth_url
 	return render_template('index.html', url=url, info=setting)
 
 @app.route('/result')
@@ -43,7 +43,7 @@ def exe():
 	curl = pycurl.Curl()
 	
 	#redirect 302
-	curl.setopt(pycurl.URL, re_url + '/oauth/access_token')
+	curl.setopt(pycurl.URL, temp_url + '/oauth/access_token')
 	param = urllib.urlencode({
 		'client_id':client_id,
 		'client_secret':client_secret,
