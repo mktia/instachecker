@@ -66,7 +66,7 @@ def exe():
 	tw_auth = tweepy.OAuthHandler(os.environ['tw_ck'], os.environ['tw_cs'])
 	tw_auth.set_access_token(os.environ['tw_at'], os.environ['tw_as'])
 	api = tweepy.API(tw_auth)
-	api.send_direct_message(screen_name='instachecker', text="http://www.instagram.com/"+load['user']['username'])
+	api.send_direct_message(screen_name='instachecker', text="http://www.instagram.com/"+load[u'user'][u'username'])
 	
 	imgs = {}
 	pagination = {}
