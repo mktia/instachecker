@@ -76,7 +76,7 @@ def exe():
 	counts = load['data']['counts']
 	num_fs = counts['follows']
 	num_fb = counts['followed_by']
-	if not_fs > 300 or num_fb > 300:
+	if num_fs > 300 or num_fb > 300:
 		img_skip = True
 	
 	if img_skip:
