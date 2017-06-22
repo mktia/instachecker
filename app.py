@@ -59,12 +59,6 @@ def exe():
     load = json.loads(res)
     
     try:
-        if(load['error_type'] == 'OAuthException'):
-            return(redirect(app_url))
-    except Exception as e:
-        print(Exception, e, 'error to loop')
-    
-    try:
         access_token = load['access_token']
     except Exception as e:
         print(e, 'access token error')
