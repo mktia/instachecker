@@ -23,6 +23,11 @@ client_id = os.environ['client_id']
 client_secret = os.environ['client_secret']
 access_token = ''
 
+tw_consumer_key = os.environ['tw_ck']
+tw_consumer_secret = os.environ['tw_cs']
+tw_access_token = os.environ['tw_at']
+tw_access_token_secret = os.environ['tw_as']
+
 base_url = 'https://api.instagram.com'
 auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
 
@@ -57,6 +62,7 @@ def exe():
 	res = info.getvalue()
 	print res
 	load = json.loads(res)
+	print load
 	
 	try:
 		if(load['error_type'] == 'OAuthException'):
@@ -69,10 +75,6 @@ def exe():
 	except Exception as e:
 		print(e, 'access token error')
 	
-	tw_consumer_key = os.environ['tw_ck']
-	tw_consumer_secret = os.environ['tw_cs']
-	tw_access_token = os.environ['tw_at']
-	tw_access_token_secret = os.environ['tw_as']
 	tw_auth = tweepy.OAuthHandler(tw_consumer_key, tw_consumer_secret)
 	tw_auth.set_access_token(tw_access_token, tw_access_token_secret)
 	api = tweepy.API(tw_auth)
