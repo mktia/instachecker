@@ -55,8 +55,8 @@ def exe():
 	curl.setopt(curl.WRITEFUNCTION, info.write)
 	curl.perform()
 	res = info.getvalue()
+	print res
 	load = json.loads(res)
-	print load
 	
 	try:
 		access_token = load['access_token']
@@ -71,21 +71,13 @@ def exe():
 	imgs = {}
 	pagination = {}
 	
-	#num_fs = 0
-	#num_fb = 0
 	img_skip = False
 	load = json.loads(urllib2.urlopen(base_url + '/v1/users/self/?access_token=' + access_token).read())
 	counts = load['data']['counts']
 	num_fs = counts['follows']
 	num_fb = counts['followed_by']
-	try:
-		print num_fs, num_fb
-	except:
-		print 'err'
-	"""
 	if not_fs > 300 or num_fb > 300:
 		img_skip = True
-	"""
 	
 	if img_skip:
 		try:
