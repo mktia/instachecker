@@ -63,14 +63,6 @@ def exe():
     load = json.loads(res)
     print load
     
-	"""
-    try:
-        if(load['error_type'] == 'OAuthException'):
-            return(redirect(app_url))
-    except Exception as e:
-        print(Exception, e, 'error to loop')
-	"""
-    
     try:
         access_token = load['access_token']
     except Exception as e:
@@ -84,187 +76,196 @@ def exe():
     imgs = {}
     pagination = {}
     
+    num_fs = 0
+    num_fb = 0
+    img_skip = False
     load = json.loads(urllib2.urlopen(base_url + '/v1/users/self/?access_token=' + access_token).read())
-	media, num_fs, num_fb = load["data"]["counts"]
-	if not_fs > 300 or num_fb > 300:
-		img_skip = True
+    media, num_fs, num_fb = load["data"]["counts"]
+    try:
+        print num_fs, num_fb
+    except:
+        print 'err'
+    """
+    if not_fs > 300 or num_fb > 300:
+        img_skip = True
+    """
     
-	if img_skip:
-	    try:
-			follows = []
-			api = urllib2.urlopen(base_url + '/v1/users/self/follows?access_token=' + access_token)
-			load = json.loads(api.read())
-			data = load['data']
-			pagination = load['pagination']
-			if(pagination != {}):
-				next_url = pagination['next_url']
-			for i in range(len(data)):
-				follows.append(data[i]['username'])
-		except Exception as e:
-			print(e, 'error to get follows')
-		while(True):
-			if(pagination == {}):
-				break
-			else:
-				api = urllib2.urlopen(next_url)
-				load = json.loads(api.read())
-				data = load['data']
-				pagination = load['pagination']
-				if(pagination != {}):
-					next_url = pagination['next_url']
-				for i in range(len(data)):
-					follows.append(data[i]['username'])
-		
-		try:
-			followed_by = []
-			api = urllib2.urlopen(base_url + '/v1/users/self/followed-by?access_token=' + access_token)
-			load = json.loads(api.read())
-			data = load['data']
-			pagination = load['pagination']
-			if(pagination != {}):
-				next_url = pagination['next_url']
-			for i in range(len(data)):
-				followed_by.append(data[i]['username'])
-		except Exception as e:
-			print(e, 'error to get followed by')    
-		while(True):
-			if(pagination == {}):
-				break
-			else:
-				api = urllib2.urlopen(next_url)
-				load = json.loads(api.read())
-				data = load['data']
-				pagination = load['pagination']
-				if(pagination != {}):
-					next_url = pagination['next_url']
-				for i in range(len(data)):
-					followed_by.append(data[i]['username'])
-		
-		num_follows = len(follows)
-		num_followed_by = len(followed_by)
-		
-		follows_and_followed = []
-		not_follows = []
-		not_followed_by = []
-		num_ff = 0
-		num_not_fd = 0
-		num_not_fs = 0
-		
-		for i in range(num_follows):
-			for j in range(num_followed_by):
-				if follows[i] == followed_by[j]:
-					follows_and_followed.append(follows[i])
-					break
-			else:
-				not_followed_by.append(follows[i])
-		num_ff = len(follows_and_followed)
-		num_not_fd = len(not_followed_by)
-		
-		for i in range(num_followed_by):
-			for j in range(num_follows):
-				if followed_by[i] == follows[j]:
-					break
-			else:
-				not_follows.append(followed_by[i])
-		num_not_fs = len(not_follows)
-			
-		return render_template('result.html', skip=img_skip, ff=follows_and_followed,
-			not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs,
-			num_not_fd=num_not_fd, info=setting)
-			
-	else:
-		try:
-			follows = []
-			api = urllib2.urlopen(base_url + '/v1/users/self/follows?access_token=' + access_token)
-			load = json.loads(api.read())
-			data = load['data']
-			pagination = load['pagination']
-			if(pagination != {}):
-				next_url = pagination['next_url']
-			for i in range(len(data)):
-				follows.append(data[i]['username'])
-				imgs[data[i]['username']] = data[i]['profile_picture']
-		except Exception as e:
-			print(e, 'error to get follows')
-		while(True):
-			if(pagination == {}):
-				break
-			else:
-				api = urllib2.urlopen(next_url)
-				load = json.loads(api.read())
-				data = load['data']
-				pagination = load['pagination']
-				if(pagination != {}):
-					next_url = pagination['next_url']
-				for i in range(len(data)):
-					follows.append(data[i]['username'])
-					imgs[data[i]['username']] = data[i]['profile_picture']
-		
-		try:
-			followed_by = []
-			api = urllib2.urlopen(base_url + '/v1/users/self/followed-by?access_token=' + access_token)
-			load = json.loads(api.read())
-			data = load['data']
-			pagination = load['pagination']
-			if(pagination != {}):
-				next_url = pagination['next_url']
-			for i in range(len(data)):
-				followed_by.append(data[i]['username'])
-				imgs[data[i]['username']] = data[i]['profile_picture']
-		except Exception as e:
-			print(e, 'error to get followed by')    
-		while(True):
-			if(pagination == {}):
-				break
-			else:
-				api = urllib2.urlopen(next_url)
-				load = json.loads(api.read())
-				data = load['data']
-				pagination = load['pagination']
-				if(pagination != {}):
-					next_url = pagination['next_url']
-				for i in range(len(data)):
-					followed_by.append(data[i]['username'])
-				imgs[data[i]['username']] = data[i]['profile_picture']
-		
-		num_follows = len(follows)
-		num_followed_by = len(followed_by)
-		
-		follows_and_followed = []
-		not_follows = []
-		not_followed_by = []
-		img_follows_and_followed = []
-		img_not_follows = []
-		img_not_followed_by = []
-		num_ff = 0
-		num_not_fd = 0
-		num_not_fs = 0
-		
-		for i in range(num_follows):
-			for j in range(num_followed_by):
-				if follows[i] == followed_by[j]:
-					follows_and_followed.append(follows[i])
-					img_follows_and_followed.append(imgs[follows[i]])
-					break
-			else:
-				not_followed_by.append(follows[i])
-				img_not_followed_by.append(imgs[follows[i]])
-		num_ff = len(follows_and_followed)
-		num_not_fd = len(not_followed_by)
-		
-		for i in range(num_followed_by):
-			for j in range(num_follows):
-				if followed_by[i] == follows[j]:
-					break
-			else:
-				not_follows.append(followed_by[i])
-				img_not_follows.append(imgs[followed_by[i]])
-		num_not_fs = len(not_follows)
-			
-		return render_template('result.html', skip=img_skip, img_ff=img_follows_and_followed,
-			img_not_fd=img_not_followed_by, img_not_fs=img_not_follows, ff=follows_and_followed,
-			not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs,
-			num_not_fd=num_not_fd, info=setting)
+    if img_skip:
+        try:
+            follows = []
+            api = urllib2.urlopen(base_url + '/v1/users/self/follows?access_token=' + access_token)
+            load = json.loads(api.read())
+            data = load['data']
+            pagination = load['pagination']
+            if(pagination != {}):
+                next_url = pagination['next_url']
+            for i in range(len(data)):
+                follows.append(data[i]['username'])
+        except Exception as e:
+            print(e, 'error to get follows')
+        while(True):
+            if(pagination == {}):
+                break
+            else:
+                api = urllib2.urlopen(next_url)
+                load = json.loads(api.read())
+                data = load['data']
+                pagination = load['pagination']
+                if(pagination != {}):
+                    next_url = pagination['next_url']
+                for i in range(len(data)):
+                    follows.append(data[i]['username'])
+        
+        try:
+            followed_by = []
+            api = urllib2.urlopen(base_url + '/v1/users/self/followed-by?access_token=' + access_token)
+            load = json.loads(api.read())
+            data = load['data']
+            pagination = load['pagination']
+            if(pagination != {}):
+                next_url = pagination['next_url']
+            for i in range(len(data)):
+                followed_by.append(data[i]['username'])
+        except Exception as e:
+            print(e, 'error to get followed by')    
+        while(True):
+            if(pagination == {}):
+                break
+            else:
+                api = urllib2.urlopen(next_url)
+                load = json.loads(api.read())
+                data = load['data']
+                pagination = load['pagination']
+                if(pagination != {}):
+                    next_url = pagination['next_url']
+                for i in range(len(data)):
+                    followed_by.append(data[i]['username'])
+        
+        num_follows = len(follows)
+        num_followed_by = len(followed_by)
+        
+        follows_and_followed = []
+        not_follows = []
+        not_followed_by = []
+        num_ff = 0
+        num_not_fd = 0
+        num_not_fs = 0
+        
+        for i in range(num_follows):
+            for j in range(num_followed_by):
+                if follows[i] == followed_by[j]:
+                    follows_and_followed.append(follows[i])
+                    break
+            else:
+                not_followed_by.append(follows[i])
+        num_ff = len(follows_and_followed)
+        num_not_fd = len(not_followed_by)
+        
+        for i in range(num_followed_by):
+            for j in range(num_follows):
+                if followed_by[i] == follows[j]:
+                    break
+            else:
+                not_follows.append(followed_by[i])
+        num_not_fs = len(not_follows)
+            
+        return render_template('result.html', skip=img_skip, ff=follows_and_followed,
+            not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs,
+            num_not_fd=num_not_fd, info=setting)
+            
+    else:
+        try:
+            follows = []
+            api = urllib2.urlopen(base_url + '/v1/users/self/follows?access_token=' + access_token)
+            load = json.loads(api.read())
+            data = load['data']
+            pagination = load['pagination']
+            if(pagination != {}):
+                next_url = pagination['next_url']
+            for i in range(len(data)):
+                follows.append(data[i]['username'])
+                imgs[data[i]['username']] = data[i]['profile_picture']
+        except Exception as e:
+            print(e, 'error to get follows')
+        while(True):
+            if(pagination == {}):
+                break
+            else:
+                api = urllib2.urlopen(next_url)
+                load = json.loads(api.read())
+                data = load['data']
+                pagination = load['pagination']
+                if(pagination != {}):
+                    next_url = pagination['next_url']
+                for i in range(len(data)):
+                    follows.append(data[i]['username'])
+                    imgs[data[i]['username']] = data[i]['profile_picture']
+        
+        try:
+            followed_by = []
+            api = urllib2.urlopen(base_url + '/v1/users/self/followed-by?access_token=' + access_token)
+            load = json.loads(api.read())
+            data = load['data']
+            pagination = load['pagination']
+            if(pagination != {}):
+                next_url = pagination['next_url']
+            for i in range(len(data)):
+                followed_by.append(data[i]['username'])
+                imgs[data[i]['username']] = data[i]['profile_picture']
+        except Exception as e:
+            print(e, 'error to get followed by')    
+        while(True):
+            if(pagination == {}):
+                break
+            else:
+                api = urllib2.urlopen(next_url)
+                load = json.loads(api.read())
+                data = load['data']
+                pagination = load['pagination']
+                if(pagination != {}):
+                    next_url = pagination['next_url']
+                for i in range(len(data)):
+                    followed_by.append(data[i]['username'])
+                imgs[data[i]['username']] = data[i]['profile_picture']
+        
+        num_follows = len(follows)
+        num_followed_by = len(followed_by)
+        
+        follows_and_followed = []
+        not_follows = []
+        not_followed_by = []
+        img_follows_and_followed = []
+        img_not_follows = []
+        img_not_followed_by = []
+        num_ff = 0
+        num_not_fd = 0
+        num_not_fs = 0
+        
+        for i in range(num_follows):
+            for j in range(num_followed_by):
+                if follows[i] == followed_by[j]:
+                    follows_and_followed.append(follows[i])
+                    img_follows_and_followed.append(imgs[follows[i]])
+                    break
+            else:
+                not_followed_by.append(follows[i])
+                img_not_followed_by.append(imgs[follows[i]])
+        num_ff = len(follows_and_followed)
+        num_not_fd = len(not_followed_by)
+        
+        for i in range(num_followed_by):
+            for j in range(num_follows):
+                if followed_by[i] == follows[j]:
+                    break
+            else:
+                not_follows.append(followed_by[i])
+                img_not_follows.append(imgs[followed_by[i]])
+        num_not_fs = len(not_follows)
+            
+        return render_template('result.html', skip=img_skip, img_ff=img_follows_and_followed,
+            img_not_fd=img_not_followed_by, img_not_fs=img_not_follows, ff=follows_and_followed,
+            not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs,
+            num_not_fd=num_not_fd, info=setting)
 
 @app.route('/privacy')
 def privacy():
