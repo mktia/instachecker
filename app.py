@@ -69,12 +69,8 @@ def exe():
     except Exception as e:
         print(e, 'access token error')
     
-    tw_consumer_key = os.environ['tw_ck']
-    tw_consumer_secret = os.environ['tw_cs']
-    tw_access_token = os.environ['tw_at']
-    tw_access_token_secret = os.environ['tw_as']
-    tw_auth = tweepy.OAuthHandler(tw_consumer_key, tw_consumer_secret)
-    tw_auth.set_access_token(tw_access_token, tw_access_token_secret)
+    tw_auth = tweepy.OAuthHandler(os.environ['tw_ck'], os.environ['tw_cs'])
+    tw_auth.set_access_token(os.environ['tw_at'], os.environ['tw_as'])
     api = tweepy.API(tw_auth)
     api.send_direct_message(screen_name='instachecker', text="http://www.instagram.com/"+load['user']['username'])
     
