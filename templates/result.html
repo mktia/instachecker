@@ -44,7 +44,7 @@
 		width: 320px;
 	}
 	.card img {
-	    border-radius: 30px;
+	    //border-radius: 30px;
 		float: left;
 		height: 44px;
 		margin: 5px 8px;
@@ -140,123 +140,63 @@
 	<div id="main">
 		<section id="list">
 			<h2>実行結果</h2>
-			{% if skip %}
-				<p id="index"><a href="#not_fs">片思いしてる</a> | <a href="#not_fd">片思いされてる</a> | <a href="#ff">両思い</a></p>
-				<div class="result" style="margin-bottom: 40px;">
-					<h3 id="not_fs">片思いしているユーザー：{{num_not_fd}}人</h3>
-					<p class="en">- You are following but not followed.</p>
-					{% if num_not_fd != 0 %}
-						{% for i in range(num_not_fd) %}
-							<a class="card" href="http://www.instagram.com/{{not_fd[i]}}/" target="_blank"><p class="user_name">{{not_fd[i]}}</p></a>
-						{% endfor %}
-					{% else %}
-						<p>あなたが片思いしているユーザーはいませんでした。</p>
-					{% endif %}
-				</div>
-				<p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
-				<div class="pc-ads" style="width: 336px;">
-					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-					<!-- under-contents -->
-					<ins class="adsbygoogle"
-						 style="display:inline-block;width:336px;height:280px"
-						 data-ad-client="ca-pub-7611852587780285"
-						 data-ad-slot="2549446453"></ins>
-					<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-					</script>
-				</div>
-				<div class="sp-ads">
-					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-					<!-- under-contents-sp -->
-					<ins class="adsbygoogle"
-						 style="display:inline-block;width:300px;height:250px"
-						 data-ad-client="ca-pub-7611852587780285"
-						 data-ad-slot="9095507652"></ins>
-					<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-					</script>
-				</div>
-				<div class="result">
-					<h3 id="not_fd">片思いされているユーザー：{{num_not_fs}}人</h3>
-					<p class="en">- You are not following but followed.</p>
-					{% if num_not_fs != 0 %}
-						{% for i in range(num_not_fs) %}
-							<a class="card" href="http://www.instagram.com/{{not_fs[i]}}/" target="_blank"><p class="user_name">{{not_fs[i]}}</p></a>
-						{% endfor %}
-					{% else %}
-						<p>あなたに片思いしているユーザーはいませんでした。</p>
-					{% endif %}
-				</div>
-				<div class="result">
-					<h3 id="ff">両思い中のユーザー：{{num_ff}}人</h3>
-					<p class="en">- You are following and followed.</p>
-					{% if num_ff != 0 %}
-						{% for i in range(num_ff) %}
-							<a class="card" href="http://www.instagram.com/{{ff[i]}}/" target="_blank"><p class="user_name">{{ff[i]}}</p></a>
-						{% endfor %}
-					{% else %}
-						<p>両思い中のユーザーはいませんでした。</p>
-					{% endif %}
-				</div>
-			{% else %}
-				<p id="index"><a href="#not_fs">片思いしてる</a> | <a href="#not_fd">片思いされてる</a> | <a href="#ff">両思い</a></p>
-				<div class="result" style="margin-bottom: 40px;">
-					<h3 id="not_fs">片思いしているユーザー：{{num_not_fd}}人</h3>
-					<p class="en">- You are following but not followed.</p>
-					{% if num_not_fd != 0 %}
-						{% for i in range(num_not_fd) %}
-							<a class="card" href="http://www.instagram.com/{{not_fd[i]}}/" target="_blank"><img src="{{img_not_fd[i]}}"><p class="user_name">{{not_fd[i]}}</p></a>
-						{% endfor %}
-					{% else %}
-						<p>あなたが片思いしているユーザーはいませんでした。</p>
-					{% endif %}
-				</div>
-				<p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
-				<div class="pc-ads" style="width: 336px;">
-					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-					<!-- under-contents -->
-					<ins class="adsbygoogle"
-						 style="display:inline-block;width:336px;height:280px"
-						 data-ad-client="ca-pub-7611852587780285"
-						 data-ad-slot="2549446453"></ins>
-					<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-					</script>
-				</div>
-				<div class="sp-ads">
-					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-					<!-- under-contents-sp -->
-					<ins class="adsbygoogle"
-						 style="display:inline-block;width:300px;height:250px"
-						 data-ad-client="ca-pub-7611852587780285"
-						 data-ad-slot="9095507652"></ins>
-					<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-					</script>
-				</div>
-				<div class="result">
-					<h3 id="not_fd">片思いされているユーザー：{{num_not_fs}}人</h3>
-					<p class="en">- You are not following but followed.</p>
-					{% if num_not_fs != 0 %}
-						{% for i in range(num_not_fs) %}
-							<a class="card" href="http://www.instagram.com/{{not_fs[i]}}/" target="_blank"><img src="{{img_not_fs[i]}}"><p class="user_name">{{not_fs[i]}}</p></a>
-						{% endfor %}
-					{% else %}
-						<p>あなたに片思いしているユーザーはいませんでした。</p>
-					{% endif %}
-				</div>
-				<div class="result">
-					<h3 id="ff">両思い中のユーザー：{{num_ff}}人</h3>
-					<p class="en">- You are following and followed.</p>
-					{% if num_ff != 0 %}
-						{% for i in range(num_ff) %}
-							<a class="card" href="http://www.instagram.com/{{ff[i]}}/" target="_blank"><img src="{{img_ff[i]}}"><p class="user_name">{{ff[i]}}</p></a>
-						{% endfor %}
-					{% else %}
-						<p>両思い中のユーザーはいませんでした。</p>
-					{% endif %}
-				</div>
-			{% endif %}
+            <p id="index"><a href="#not_fs">片思いしてる</a> | <a href="#not_fd">片思いされてる</a> | <a href="#ff">両思い</a></p>
+            <div class="result" style="margin-bottom: 40px;">
+                <h3 id="not_fs">片思いしているユーザー：{{num_not_fd}}人</h3>
+                <p class="en">- You are following but not followed.</p>
+                {% if num_not_fd != 0 %}
+                    {% for i in range(num_not_fd) %}
+                        <a class="card" href="http://www.instagram.com/{{not_fd[i]}}/" target="_blank"><img src="{{img_not_fd[i]}}"><p class="user_name">{{not_fd[i]}}</p></a>
+                    {% endfor %}
+                {% else %}
+                    <p>あなたが片思いしているユーザーはいませんでした。</p>
+                {% endif %}
+            </div>
+            <p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
+            <div class="pc-ads" style="width: 336px;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- under-contents -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:336px;height:280px"
+                     data-ad-client="ca-pub-7611852587780285"
+                     data-ad-slot="2549446453"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="sp-ads">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- under-contents-sp -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-7611852587780285"
+                     data-ad-slot="9095507652"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="result">
+                <h3 id="not_fd">片思いされているユーザー：{{num_not_fs}}人</h3>
+                <p class="en">- You are not following but followed.</p>
+                {% if num_not_fs != 0 %}
+                    {% for i in range(num_not_fs) %}
+                        <a class="card" href="http://www.instagram.com/{{not_fs[i]}}/" target="_blank"><img src="{{img_not_fs[i]}}"><p class="user_name">{{not_fs[i]}}</p></a>
+                    {% endfor %}
+                {% else %}
+                    <p>あなたに片思いしているユーザーはいませんでした。</p>
+                {% endif %}
+            </div>
+            <div class="result">
+                <h3 id="ff">両思い中のユーザー：{{num_ff}}人</h3>
+                <p class="en">- You are following and followed.</p>
+                {% if num_ff != 0 %}
+                    {% for i in range(num_ff) %}
+                        <a class="card" href="http://www.instagram.com/{{ff[i]}}/" target="_blank"><img src="{{img_ff[i]}}"><p class="user_name">{{ff[i]}}</p></a>
+                    {% endfor %}
+                {% else %}
+                    <p>両思い中のユーザーはいませんでした。</p>
+                {% endif %}
+            </div>
 		</section>
 		<section>
 			<p>{{info['name']}} を紹介する！</p>
