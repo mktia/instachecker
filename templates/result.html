@@ -32,6 +32,7 @@
 	<link rel="apple-touch-icon" sizes="76x76" href="../static/apple-touch-icon/touch-icon-ipad.png">
 	<link rel="apple-touch-icon" sizes="120x120" href="../static/apple-touch-icon/touch-icon-iphone-retina.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="../static/apple-touch-icon/touch-icon-ipad-retina.png">
+    {# CSS は style.css を基本とし、ページ特有のものは head タグ内に記載 #}
 	<style>
 	/* this page only*/
 	.card {
@@ -44,7 +45,7 @@
 		width: 320px;
 	}
 	.card img {
-	    //border-radius: 30px;
+	    border-radius: 30px;
 		float: left;
 		height: 44px;
 		margin: 5px 8px;
@@ -143,13 +144,76 @@
             <p id="index"><a href="#not_fs">片思いしてる</a> | <a href="#not_fd">片思いされてる</a> | <a href="#ff">両思い</a></p>
             <div class="result" style="margin-bottom: 40px;">
                 <h3 id="not_fs">片思いしているユーザー：{{num_not_fd}}人</h3>
-                <p class="en">- You are following but not followed.</p>
+                {# <p class="en">- You are following but not followed.</p> #}
                 {% if num_not_fd != 0 %}
                     {% for i in range(num_not_fd) %}
                         <a class="card" href="http://www.instagram.com/{{not_fd[i]}}/" target="_blank"><img src="{{img_not_fd[i]}}"><p class="user_name">{{not_fd[i]}}</p></a>
+                        {# 10 アカウント表示ごとに広告 #}
+                        {% if (i != 0) and (i % 9 == 0)  %}
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-format="fluid"
+                                 data-ad-layout="image-side"
+                                 data-ad-layout-key="-fl+6f+1c-hw+ry"
+                                 data-ad-client="ca-pub-7611852587780285"
+                                 data-ad-slot="4733710689"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        {% endif %}
                     {% endfor %}
                 {% else %}
                     <p>あなたが片思いしているユーザーはいませんでした。</p>
+                {% endif %}
+            </div>
+            <p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
+            {# pc-ads で PC のみ、sp-ads でスマホのみ広告表示 
+            　　　デバイスの判別は画面の幅により制御　#}
+            <div class="pc-ads" style="width: 336px;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- under-contents -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:336px;height:280px"
+                     data-ad-client="ca-pub-7611852587780285"
+                     data-ad-slot="2549446453"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="sp-ads">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- under-contents-sp -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:300px;height:250px"
+                     data-ad-client="ca-pub-7611852587780285"
+                     data-ad-slot="9095507652"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="result">
+                <h3 id="not_fd">片思いされているユーザー：{{num_not_fs}}人</h3>
+                {# <p class="en">- You are not following but followed.</p> #}
+                {% if num_not_fs != 0 %}
+                    {% for i in range(num_not_fs) %}
+                        <a class="card" href="http://www.instagram.com/{{not_fs[i]}}/" target="_blank"><img src="{{img_not_fs[i]}}"><p class="user_name">{{not_fs[i]}}</p></a>
+                        {% if (i != 0) and (i % 9 == 0)  %}
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-format="fluid"
+                                 data-ad-layout="image-side"
+                                 data-ad-layout-key="-fl+6f+1c-hw+ry"
+                                 data-ad-client="ca-pub-7611852587780285"
+                                 data-ad-slot="4733710689"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p>あなたに片思いしているユーザーはいませんでした。</p>
                 {% endif %}
             </div>
             <p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
@@ -176,22 +240,24 @@
                 </script>
             </div>
             <div class="result">
-                <h3 id="not_fd">片思いされているユーザー：{{num_not_fs}}人</h3>
-                <p class="en">- You are not following but followed.</p>
-                {% if num_not_fs != 0 %}
-                    {% for i in range(num_not_fs) %}
-                        <a class="card" href="http://www.instagram.com/{{not_fs[i]}}/" target="_blank"><img src="{{img_not_fs[i]}}"><p class="user_name">{{not_fs[i]}}</p></a>
-                    {% endfor %}
-                {% else %}
-                    <p>あなたに片思いしているユーザーはいませんでした。</p>
-                {% endif %}
-            </div>
-            <div class="result">
                 <h3 id="ff">両思い中のユーザー：{{num_ff}}人</h3>
-                <p class="en">- You are following and followed.</p>
+                {# <p class="en">- You are following and followed.</p> #}
                 {% if num_ff != 0 %}
                     {% for i in range(num_ff) %}
                         <a class="card" href="http://www.instagram.com/{{ff[i]}}/" target="_blank"><img src="{{img_ff[i]}}"><p class="user_name">{{ff[i]}}</p></a>
+                        {% if (i != 0) and (i % 9 == 0)  %}
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-format="fluid"
+                                 data-ad-layout="image-side"
+                                 data-ad-layout-key="-fl+6f+1c-hw+ry"
+                                 data-ad-client="ca-pub-7611852587780285"
+                                 data-ad-slot="4733710689"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        {% endif %}
                     {% endfor %}
                 {% else %}
                     <p>両思い中のユーザーはいませんでした。</p>
