@@ -143,50 +143,7 @@ def exe():
         'not_fd' : {'num' : 0, 'name' : [], 'img' : []},
     }
     
-    """
-    follows_and_followed = []
-    not_follows = []
-    not_followed_by = []
-    img_follows_and_followed = []
-    img_not_follows = []
-    img_not_followed_by = []
-    num_ff = 0
-    num_not_fd = 0
-    num_not_fs = 0
-    
-    for i in range(num_follows):
-        for j in range(num_followed_by):
-            if follows[i] == followed_by[j]:
-                follows_and_followed.append(follows[i])
-                tmp_img = imgs[follows[i]]
-                img_follows_and_followed.append(tmp_img)
-                break
-        else:
-            not_followed_by.append(follows[i])
-            try:
-                tmp_img = imgs[follows[i]]
-                img_not_followed_by.append(tmp_img)
-            except Exception as e:
-                print(e)
-    num_ff = len(follows_and_followed)
-    num_not_fd = len(not_followed_by)
-    
-    for i in range(num_followed_by):
-        for j in range(num_follows):
-            if followed_by[i] == follows[j]:
-                break
-        else:
-            not_follows.append(followed_by[i])
-            try:
-                tmp_img = imgs[followed_by[i]]
-                img_not_follows.append(tmp_img)
-            except Exception as e:
-                print(e)
-    num_not_fs = len(not_follows)
-        
-    return render_template('result.html', img_ff=img_follows_and_followed, img_not_fd=img_not_followed_by, img_not_fs=img_not_follows, ff=follows_and_followed, not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs, num_not_fd=num_not_fd, info=setting)
-    """
-    
+    #ffチェック
     for i in range(num_follows):
         for j in range(num_followed_by):
             if follows[i] == followed_by[j]:
