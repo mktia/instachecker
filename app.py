@@ -19,7 +19,8 @@ setting = {
 }
 
 app_url = setting['url']
-app_redirect_url = app_url + '/result'　#OAuth 後のリダイレクト先
+#OAuth 後のリダイレクト先
+app_redirect_url = app_url + '/result'
 client_id = os.environ['client_id']
 client_secret = os.environ['client_secret']
 access_token = ''
