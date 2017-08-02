@@ -35,6 +35,10 @@
     {# CSS は style.css を基本とし、ページ特有のものは head タグ内に記載 #}
 	<style>
 	/* this page only*/
+    .ad-card {
+		margin: 5px 0 5px;
+		width: 320px;
+    }
 	.card {
 		border: 1px solid #dbdbdb;
 		border-radius: 5px;
@@ -127,7 +131,6 @@
 				<img src="../static/logo.jpg">
 				<h1><a href="{{info['url']}}">{{info['name']}}</a></h1>
 			</div>
-			<!-- <a id="logout" href="https://www.instagram.com/accounts/logout" target="_blank">Log out</a> -->
 		</div>
 	</header>
 	<div id="fb-root"></div>
@@ -141,26 +144,28 @@
 	<div id="main">
 		<section id="list">
 			<h2>実行結果</h2>
-            <p id="index"><a href="#not_fs">片思いしてる</a> | <a href="#not_fd">片思いされてる</a> | <a href="#ff">両思い</a></p>
+            <p id="index"><a href="#not_fd">片思いしてる</a> | <a href="#not_fs">片思いされてる</a> | <a href="#ff">両思い</a></p>
             <div class="result" style="margin-bottom: 40px;">
-                <h3 id="not_fs">片思いしているユーザー：{{num_not_fd}}人</h3>
+                <h3 id="not_fd">片思いしているユーザー：{{result['not_fd']['num']}}人</h3>
                 {# <p class="en">- You are following but not followed.</p> #}
-                {% if num_not_fd != 0 %}
-                    {% for i in range(num_not_fd) %}
-                        <a class="card" href="http://www.instagram.com/{{not_fd[i]}}/" target="_blank"><img src="{{img_not_fd[i]}}"><p class="user_name">{{not_fd[i]}}</p></a>
+                {% if result['not_fd']['num'] != 0 %}
+                    {% for i in range(result['not_fd']['num']) %}
+                        <a class="card" href="http://www.instagram.com/{{result['not_fd']['name'][i]}}/" target="_blank"><img src="{{result['not_fd']['img'][i]}}"><p class="user_name">{{result['not_fd']['name'][i]}}</p></a>
                         {# 10 アカウント表示ごとに広告 #}
                         {% if (i != 0) and (i % 9 == 0)  %}
-                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-format="fluid"
-                                 data-ad-layout="image-side"
-                                 data-ad-layout-key="-fl+6f+1c-hw+ry"
-                                 data-ad-client="ca-pub-7611852587780285"
-                                 data-ad-slot="4733710689"></ins>
-                            <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                            <div class="ad-card">
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-format="fluid"
+                                     data-ad-layout="image-side"
+                                     data-ad-layout-key="-fl+6f+1c-hw+ry"
+                                     data-ad-client="ca-pub-7611852587780285"
+                                     data-ad-slot="4733710689"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
                         {% endif %}
                     {% endfor %}
                 {% else %}
@@ -193,23 +198,25 @@
                 </script>
             </div>
             <div class="result">
-                <h3 id="not_fd">片思いされているユーザー：{{num_not_fs}}人</h3>
+                <h3 id="not_fs">片思いされているユーザー：{{result['not_fs']['num']}}人</h3>
                 {# <p class="en">- You are not following but followed.</p> #}
-                {% if num_not_fs != 0 %}
-                    {% for i in range(num_not_fs) %}
-                        <a class="card" href="http://www.instagram.com/{{not_fs[i]}}/" target="_blank"><img src="{{img_not_fs[i]}}"><p class="user_name">{{not_fs[i]}}</p></a>
+                {% if result['not_fs']['num'] != 0 %}
+                    {% for i in range(result['not_fs']['num']) %}
+                        <a class="card" href="http://www.instagram.com/{{result['not_fs']['name'][i]}}/" target="_blank"><img src="{{result['not_fd']['img'][i]}}"><p class="user_name">{{result['not_fs']['name'][i]}}</p></a>
                         {% if (i != 0) and (i % 9 == 0)  %}
-                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-format="fluid"
-                                 data-ad-layout="image-side"
-                                 data-ad-layout-key="-fl+6f+1c-hw+ry"
-                                 data-ad-client="ca-pub-7611852587780285"
-                                 data-ad-slot="4733710689"></ins>
-                            <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                            <div class="ad-card">
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-format="fluid"
+                                     data-ad-layout="image-side"
+                                     data-ad-layout-key="-fl+6f+1c-hw+ry"
+                                     data-ad-client="ca-pub-7611852587780285"
+                                     data-ad-slot="4733710689"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
                         {% endif %}
                     {% endfor %}
                 {% else %}
@@ -240,23 +247,25 @@
                 </script>
             </div>
             <div class="result">
-                <h3 id="ff">両思い中のユーザー：{{num_ff}}人</h3>
+                <h3 id="ff">両思い中のユーザー：{{result['fs_and_fd']['num']}}人</h3>
                 {# <p class="en">- You are following and followed.</p> #}
-                {% if num_ff != 0 %}
-                    {% for i in range(num_ff) %}
-                        <a class="card" href="http://www.instagram.com/{{ff[i]}}/" target="_blank"><img src="{{img_ff[i]}}"><p class="user_name">{{ff[i]}}</p></a>
+                {% if result['fs_and_fd']['num'] != 0 %}
+                    {% for i in range(result['fs_and_fd']['num']) %}
+                        <a class="card" href="http://www.instagram.com/{{result['fs_and_fd']['name'][i]}}/" target="_blank"><img src="{{result['fs_and_fd']['img'][i]}}"><p class="user_name">{{result['fs_and_fd']['name'][i]}}</p></a>
                         {% if (i != 0) and (i % 9 == 0)  %}
-                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <ins class="adsbygoogle"
-                                 style="display:block"
-                                 data-ad-format="fluid"
-                                 data-ad-layout="image-side"
-                                 data-ad-layout-key="-fl+6f+1c-hw+ry"
-                                 data-ad-client="ca-pub-7611852587780285"
-                                 data-ad-slot="4733710689"></ins>
-                            <script>
-                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                            <div class="ad-card">
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-format="fluid"
+                                     data-ad-layout="image-side"
+                                     data-ad-layout-key="-fl+6f+1c-hw+ry"
+                                     data-ad-client="ca-pub-7611852587780285"
+                                     data-ad-slot="4733710689"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
                         {% endif %}
                     {% endfor %}
                 {% else %}

@@ -10,6 +10,7 @@ from StringIO import StringIO
 
 app = Flask(__name__)
 
+#検索エンジンに通知するドメイン、サイト名、説明文
 setting = {
     'url' : 'https://instachecker.herokuapp.com',
     'name' : 'InstaChecker',
@@ -18,7 +19,7 @@ setting = {
 }
 
 app_url = setting['url']
-app_redirect_url = app_url + '/result'
+app_redirect_url = app_url + '/result'　#OAuth 後のリダイレクト先
 client_id = os.environ['client_id']
 client_secret = os.environ['client_secret']
 access_token = ''
@@ -26,29 +27,24 @@ access_token = ''
 base_url = 'https://api.instagram.com'
 auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
 
-#redirect 302
-re_url = 'https://www.instagram.com'
-temp_url = base_url
-
 @app.route('/')
 def auth():
-    #redirect 302
-    url = temp_url + auth_url
+    url = base_url + auth_url
     return render_template('index.html', url=url, info=setting)
 
 @app.route('/result')
 def exe():
+    #OAuth による認証
     code = request.args.get('code')
     info = StringIO()
     curl = pycurl.Curl()
     
-    #redirect 302
-    curl.setopt(pycurl.URL, temp_url + '/oauth/access_token')
+    curl.setopt(pycurl.URL, base_url + '/oauth/access_token')
     param = urllib.urlencode({
-        'client_id':client_id,
-        'client_secret':client_secret,
-        'grant_type':'authorization_code',
-        'redirect_uri':app_redirect_url,
+        'client_id' : client_id,
+        'client_secret' : client_secret,
+        'grant_type' : 'authorization_code',
+        'redirect_uri' : app_redirect_url,
         'code':code
     })
     curl.setopt(pycurl.POSTFIELDS, param)
@@ -62,21 +58,26 @@ def exe():
         if(load['error_type'] == 'OAuthException'):
             return(redirect(app_url))
     except Exception as e:
-        print(Exception, e, 'error to loop')
+        print(Exception, e, 'error (OAuthException)')
     
+    #access token 取得失敗
     try:
         access_token = load['access_token']
     except Exception as e:
-        print(e, 'access token error')
+        print(e, 'error (access_token)')
     
     tw_auth = tweepy.OAuthHandler(os.environ['tw_ck'], os.environ['tw_cs'])
     tw_auth.set_access_token(os.environ['tw_at'], os.environ['tw_as'])
     api = tweepy.API(tw_auth)
-    api.send_direct_message(screen_name='instachecker', text="http://www.instagram.com/"+load['user']['username'])
+    try:
+        api.send_direct_message(screen_name='instachecker', text="http://www.instagram.com/"+load['user']['username'])
+    except Exception as e:
+        print(e, 'error (Twitter DM)')
     
     imgs = {}
     pagination = {}
     
+    #フォローしているアカウントを取得
     try:
         follows = []
         api = urllib2.urlopen(base_url + '/v1/users/self/follows?access_token=' + access_token)
@@ -104,6 +105,7 @@ def exe():
                 follows.append(data[i]['username'])
                 imgs[data[i]['username']] = data[i]['profile_picture']
     
+    #フォローされているアカウントを取得
     try:
         followed_by = []
         api = urllib2.urlopen(base_url + '/v1/users/self/followed-by?access_token=' + access_token)
@@ -134,8 +136,13 @@ def exe():
     num_follows = len(follows)
     num_followed_by = len(followed_by)
     
-    #print('Follows:' + str(num_follows) + ', Followers:' + str(num_followed_by))
+    result = {
+        'fs_and_fd' : {'num' : 0, 'name' : [], 'img' : []},
+        'not_fs' : {'num' : 0, 'name' : [], 'img' : []},
+        'not_fd' : {'num' : 0, 'name' : [], 'img' : []},
+    }
     
+    """
     follows_and_followed = []
     not_follows = []
     not_followed_by = []
@@ -162,12 +169,6 @@ def exe():
                 print(e)
     num_ff = len(follows_and_followed)
     num_not_fd = len(not_followed_by)
-    """
-    if num_not_fd != 0:
-        print("You aren't followed by:" + str(num_not_fd))
-    else:
-        print('You are followed by all the user you follow.')
-    """
     
     for i in range(num_followed_by):
         for j in range(num_follows):
@@ -181,24 +182,45 @@ def exe():
             except Exception as e:
                 print(e)
     num_not_fs = len(not_follows)
-    """
-    if num_not_fs != 0:    
-        print("You don't follow:" + str(num_not_fs))
-    else:
-        print('You are followed by all the user you follow.')
-    """
         
     return render_template('result.html', img_ff=img_follows_and_followed, img_not_fd=img_not_followed_by, img_not_fs=img_not_follows, ff=follows_and_followed, not_fd=not_followed_by, not_fs=not_follows, num_ff=num_ff, num_not_fs=num_not_fs, num_not_fd=num_not_fd, info=setting)
-
-'''
-@app.route('/logout')
-def restart():
-    #redirect('https://www.instagram.com/accounts/logout')
-    urllib.urlopen('https://www.instagram.com/accounts/logout')
-    url = base_url + auth_url
-    return render_template('index.html', url=url, info=setting)
-'''
-
+    """
+    
+    for i in range(num_follows):
+        for j in range(num_followed_by):
+            if follows[i] == followed_by[j]:
+                result['fs_and_fd']['name'].append(follows[i])
+                try:
+                    tmp_img = imgs[follows[i]]
+                    result['fs_and_fd']['img'].append(tmp_img)
+                except Exception as e:
+                    print(e)
+                break
+        else:
+            result['not_fd']['name'].append(follows[i])
+            try:
+                tmp_img = imgs[follows[i]]
+                result['not_fd']['img'].append(tmp_img)
+            except Exception as e:
+                print(e)
+    result['fs_and_fd']['num'] = len(result['fs_and_fd']['name'])
+    result['not_fd']['num'] = len(result['not_fd']['name'])
+    
+    for i in range(num_followed_by):
+        for j in range(num_follows):
+            if followed_by[i] == follows[j]:
+                break
+        else:
+            result['not_fs']['name'].append(followed_by[i])
+            try:
+                tmp_img = imgs[followed_by[i]]
+                result['not_fs']['img'].append(tmp_img)
+            except Exception as e:
+                print(e)
+    result['not_fs']['num'] = len(result['not_fs']['name'])
+        
+    return render_template('result.html', result=result, info=setting)
+    
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html', info=setting)
