@@ -178,6 +178,11 @@ def exe():
     result['not_fs']['num'] = len(result['not_fs']['name'])
         
     return render_template('result.html', result=result, info=setting)
+
+@app.route('/logout')
+def restart():
+    urllib2.urlopen('https://www.instagram.com/accounts/logout')
+    return redirect(app_url)
     
 @app.route('/privacy')
 def privacy():
