@@ -1,4 +1,4 @@
-#InstaChecker
+# InstaChecker
 
 The aim of this application is to check the relationship of the user.
 It shows you the list of account which you are following and followed by, so the user manages his friends more efficiently.
