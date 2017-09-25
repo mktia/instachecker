@@ -161,7 +161,15 @@
     </div>
     <footer class="mobile-small">
         <p><a href="{{info['url']}}/privacy">Privacy Policy</a> | <a href="{{info['url']}}/contact">Contact Us</a></p>
-        <p>&copy;2016-2017 <a href="https://www.mktia.com">mktia</a> All rights reserved.</p>
+        <p>
+            &copy;
+            <script>
+                var date = new Date();
+                var year = date.getFullYear();
+                document.write("2016-" + year);
+            </script>
+            <a href="https://www.mktia.com">mktia</a>.
+        </p>
     </footer>
 </body>
 </html>
