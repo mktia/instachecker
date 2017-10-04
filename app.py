@@ -134,47 +134,49 @@ def exe():
                 followed_by.append(data[i]['username'])
             imgs[data[i]['username']] = data[i]['profile_picture']
     
-    num_follows = len(follows)
-    num_followed_by = len(followed_by)
-    
     result = {
         'fs_and_fd' : {'num' : 0, 'name' : [], 'img' : []},
         'not_fs' : {'num' : 0, 'name' : [], 'img' : []},
         'not_fd' : {'num' : 0, 'name' : [], 'img' : []},
     }
     
+    #相互をフォローユーザー、被フォローユーザーリストから除いた片思い、片思われリスト
+    checked_follows = follows
+    checked_followed_by = followed_by
+    
     #ffチェック
-    for i in range(num_follows):
-        for j in range(num_followed_by):
-            if follows[i] == followed_by[j]:
-                result['fs_and_fd']['name'].append(follows[i])
+    for fs in follows:
+        for fd in followed_by:
+            if fs == fd:
+                result['fs_and_fd']['name'].append(fs)
+                checked_follows.remove(fs)
                 try:
-                    tmp_img = imgs[follows[i]]
-                    result['fs_and_fd']['img'].append(tmp_img)
+                    result['fs_and_fd']['img'].append(imgs[fs])
                 except Exception as e:
                     print(e)
                 break
-        else:
-            result['not_fd']['name'].append(follows[i])
-            try:
-                tmp_img = imgs[follows[i]]
-                result['not_fd']['img'].append(tmp_img)
-            except Exception as e:
-                print(e)
+
+    #片思いの処理
+    result['not_fd']['name'] = checked_follows
+    for cfs in checked_follows:
+        try:
+            result['not_fd']['img'].append(imgs[cfs])
+        except Exception as e:
+            print(e)
+    
+    #片思われの処理
+    for ff in result['fs_and_fd']['name']:
+        checked_followed_by.remove(ff)
+        
+    result['not_fs']['name'] = checked_followed_by
+    for cfd in checked_followed_by:
+        try:
+            result['not_fs']['img'].append(imgs[cfd])
+        except Exception as e:
+            print(e)
+            
     result['fs_and_fd']['num'] = len(result['fs_and_fd']['name'])
     result['not_fd']['num'] = len(result['not_fd']['name'])
-    
-    for i in range(num_followed_by):
-        for j in range(num_follows):
-            if followed_by[i] == follows[j]:
-                break
-        else:
-            result['not_fs']['name'].append(followed_by[i])
-            try:
-                tmp_img = imgs[followed_by[i]]
-                result['not_fs']['img'].append(tmp_img)
-            except Exception as e:
-                print(e)
     result['not_fs']['num'] = len(result['not_fs']['name'])
         
     return render_template('result.html', result=result, info=setting)
