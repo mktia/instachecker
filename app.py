@@ -159,9 +159,6 @@ def exe():
         checked_follows.remove(ff)
         checked_followed_by.remove(ff)
         
-    print(checked_follows)
-    print(checked_followed_by)
-        
     #片思いの処理  
     result['not_fd']['name'] = checked_follows
     for cfs in checked_follows:
