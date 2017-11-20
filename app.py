@@ -32,6 +32,13 @@ auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_r
 def auth():
     url = base_url + auth_url
     return render_template('index.html', url=url, info=setting)
+    
+@app.route('/id')
+def auth():
+    url = base_url + auth_url
+    setting['description'] = 'cara yang untuk melihat siapa yang tidak memfollow kamu atau yang unfollowers kamu'
+    setting['short_description'] = 'cara yang untuk melihat siapa yang tidak memfollow kamu atau yang unfollowers kamu'
+    return render_template('index_id.html', url=url, info=setting)
 
 @app.route('/result')
 def exe():
