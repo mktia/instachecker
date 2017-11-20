@@ -10,7 +10,7 @@ from StringIO import StringIO
 
 app = Flask(__name__)
 
-#検索エンジンに通知するドメイン、サイト名、説明文
+# Basic URL, Web site name, and description which tell search engine
 setting = {
     'url' : 'https://instachecker.herokuapp.com',
     'name' : 'InstaChecker',
@@ -19,7 +19,7 @@ setting = {
 }
 
 app_url = setting['url']
-#OAuth 後のリダイレクト先
+# Redirect URL after OAuth
 app_redirect_url = app_url + '/result'
 client_id = os.environ['client_id']
 client_secret = os.environ['client_secret']
@@ -29,12 +29,12 @@ base_url = 'https://api.instagram.com'
 auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
 
 @app.route('/')
-def auth():
+def top():
     url = base_url + auth_url
     return render_template('index.html', url=url, info=setting)
     
 @app.route('/id')
-def auth():
+def top_id():
     url = base_url + auth_url
     setting['description'] = 'cara yang untuk melihat siapa yang tidak memfollow kamu atau yang unfollowers kamu'
     setting['short_description'] = 'cara yang untuk melihat siapa yang tidak memfollow kamu atau yang unfollowers kamu'
@@ -42,7 +42,7 @@ def auth():
 
 @app.route('/result')
 def exe():
-    #OAuth による認証
+    # Authentication with OAuth
     code = request.args.get('code')
     info = StringIO()
     curl = pycurl.Curl()
