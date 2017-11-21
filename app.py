@@ -21,6 +21,7 @@ setting = {
 app_url = setting['url']
 # Redirect URL after OAuth
 app_redirect_url = app_url + '/result'
+
 client_id = os.environ['client_id']
 client_secret = os.environ['client_secret']
 access_token = ''
@@ -31,14 +32,14 @@ auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_r
 @app.route('/')
 def top():
     url = base_url + auth_url
-    return render_template('index.html', url=url, info=setting)
+    return render_template('index.html', url=url, info=setting, lang='')
     
 @app.route('/id')
 def top_id():
     url = base_url + auth_url
     setting['description'] = 'cara yang untuk melihat siapa yang tidak memfollow kamu atau yang unfollowers kamu'
     setting['short_description'] = 'cara yang untuk melihat siapa yang tidak memfollow kamu atau yang unfollowers kamu'
-    return render_template('index_id.html', url=url, info=setting)
+    return render_template('index_id.html', url=url, info=setting, lang='/id')
 
 @app.route('/result')
 def exe():
@@ -59,7 +60,7 @@ def exe():
     curl.setopt(curl.WRITEFUNCTION, info.write)
     curl.perform()
     res = info.getvalue()
-    print res
+    #print(res)
     load = json.loads(res)
     
     try:
@@ -159,7 +160,7 @@ def exe():
                 try:
                     result['fs_and_fd']['img'].append(imgs[fs])
                 except Exception as e:
-                    print(e)
+                    print(e, fs_and_fd)
                 break
 
     for ff in result['fs_and_fd']['name']:
@@ -172,7 +173,7 @@ def exe():
         try:
             result['not_fd']['img'].append(imgs[cfs])
         except Exception as e:
-            print(e)
+            print(e, 'not_fd error')
     
     #片思われの処理
     result['not_fs']['name'] = checked_followed_by
@@ -180,7 +181,7 @@ def exe():
         try:
             result['not_fs']['img'].append(imgs[cfd])
         except Exception as e:
-            print(e)
+            print(e, 'not_fs error')
             
     result['fs_and_fd']['num'] = len(result['fs_and_fd']['name'])
     result['not_fd']['num'] = len(result['not_fd']['name'])
