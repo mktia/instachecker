@@ -10,8 +10,7 @@ body {
 	font-family: 'Open Sans', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', 'YuGothic', 'Hiragino Kaku Gothic Pro', serif;
 	font-size: 15px;
 	overflow-x: hidden;
-	margin: auto;
-	width: 800px;
+	margin: 0;
 }
 footer, footer a {
 	color: #777;
@@ -19,14 +18,14 @@ footer, footer a {
 	text-align: center;
 	text-decoration: none;
 }
+footer, #main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}
 h1 a {
 	color: #333;
 	text-decoration: none;
-}
-header {
-	background-color: #fff;
-	border-bottom: 1px solid #dbdbdb;
-	margin: -25px -1000px 0;
 }
 section {
 	background-color: #fff;
@@ -88,6 +87,12 @@ section h4 {
 	color: #aaa;
 	margin: 0 0 2em;
 }
+.header {
+	background-color: #fff;
+	border-bottom: 1px solid #dbdbdb;
+	margin-top: -25px;
+    width: 100%;
+}
 .pc-ads {
 	display: table;
 	margin: 0 auto;
@@ -124,9 +129,11 @@ section h4 {
 	width: 1100px;
 }
 #title img {
-	 float: left;
-	 margin: 19px;
-	 width: 38px;"
+    float: left;
+    margin-left: 19px;
+    margin-right: 19px;
+    margin-top: 19px;
+    width: 38px;"
 }
 #title h1 {
 	font-family: Billabong;
@@ -137,12 +144,6 @@ section h4 {
 }
 /* smartphone or tablet */
 @media screen and (max-width: 1100px) {
-	body {
-		width: initial;
-	}
-	header {
-		margin: 0;
-	}
 	.pc-ads {
 		display: none;
 	}
@@ -154,14 +155,11 @@ section h4 {
 		margin: 0 auto;
 		width: 300px;
 	}
-	#title {
-		width: 100%;
-	}
-	#title p {
-		padding-left: 10pz;
-	}
 }
 @media screen and (max-width: 768px) {
+    footer, #main {
+        width: 100%;
+    }
 	.btn-ln {
 		color: #fff;
 		display: block;
@@ -181,10 +179,20 @@ section h4 {
 		padding-left: 10px;
 		padding-right: 10px;
 	}
+    .header {
+        height: 64px;
+    }
 	.welcome {
 		margin-left: -10px;
 		margin-right: -10px;
 	}
+    #title h1 {
+        font-size: 30px;
+    }
+    #title img {
+        margin-right: 10px;
+        width: 30px;
+    }
 }
 @media screen and (max-width: 320px) {
 	.btn-text {
