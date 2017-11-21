@@ -162,6 +162,9 @@ section h4 {
 		margin: 0 auto;
 		width: 300px;
 	}
+    #title {
+        width: 100%;
+    }
 }
 @media screen and (max-width: 768px) {
     footer, #main {
