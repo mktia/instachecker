@@ -3,7 +3,7 @@
 {% block head %}
     {{ super() }}
     {# URL 及び hreflang には必ず ISO 639-1 の言語コードを用いること #}
-    <link rel="alternate" hreflang="id" href="{{info['url']}}{{lang}}">
+    <link rel="alternate" hreflang="ja" href="{{info['url']}}">
     <style>
         body {
             font-size: 15px;
@@ -16,7 +16,7 @@
                 let filter = document.getElementById('lang');
                 filter.addEventListener('change', changeLanguage);
             }
-            
+
             function changeLanguage() {
                 var num = document.getElementById('lang').selectedIndex;
                 var val = document.getElementById('lang').options[num].value;
