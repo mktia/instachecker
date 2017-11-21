@@ -1,0 +1,165 @@
+<html>
+<head>
+{% block head %}
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> 
+    <![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{info['description']}}">
+    <meta name="theme-color" content="#d82e86">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{info['description']}}">
+    <meta property="og:title" content="{{info['name']}}">
+    <meta property="og:url" content="{{info['url']}}{{lang}}">
+    <meta property="og:image" content="{{info['url']}}/static/ogp-image.png">
+    <meta property="og:site_name" content="{{info['name']}}">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="{{info['description']}}">
+    <meta name="twitter:title" content="{{info['name']}}">
+    <meta name="twitter:url" content="{{info['url']}}{{lang}}">
+    <meta name="twitter:image" content="{{info['url']}}/static/ogp-image.png">
+    <meta name="twitter:domain" content="{{info['url']}}{{lang}}">
+    <meta name="twitter:creator" content="@instachecker">
+    <meta name="twitter:site" content="@instachecker">
+    <title>{% block title %}{% endblock %} | {{info['short_description']}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css" type="text/css">
+    <link rel="stylesheet" href="../static/icon-style.css" type="text/css">    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="apple-touch-icon" href="../static/apple-touch-icon/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../static/apple-touch-icon/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../static/apple-touch-icon/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../static/apple-touch-icon/touch-icon-ipad-retina.png">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-87972162-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-7611852587780285",
+        enable_page_level_ads: true
+      });
+    </script>
+    <style>
+        select {
+            background-color: #fafafa;
+            border-color: #fafafa;
+            font-size: 16px;
+        }
+    </style>
+{% endblock %}
+</head>
+<body>
+    <div class="header">
+        <header>
+            <div id="title">
+                <div>
+                    <img src="../static/logo.jpg">
+                    <h1><a href="{{info['url']}}{{lang}}">{{info['name']}}</a></h1>
+                </div>
+            </div>
+        </header>
+    </div>
+    <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8&appId=555469271313885";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <div id="main">
+        <script>
+            window.onload = function() {
+                let filter = document.getElementById('lang');
+                filter.addEventListener('change', changeLanguage);
+            }
+            
+            function changeLanguage() {
+                var num = document.getElementById('lang').selectedIndex;
+                var val = document.getElementById('lang').options[num].value;
+                /*
+                var redirect_url = {{info['URL']}} + '/' + val + location.search;
+                if (document.referrer) {
+                    var referrer = "referrer=" + encodeURIComponent(document.referrer);
+                    redirect_url = redirect_url + (location.search ? '&' : '?') + referrer;
+                }*/
+                location.href = 'http://localhost:5000' + '/' + val;
+            }
+        </script>
+        language: <select name="lang" id="lang" onchange="changeLanguage();">
+            <option selected disabled>Choose</option>
+            <option value="id">Indonesian</option>
+            <option value="">Japanese</option>
+        </select>{% block content %}{% endblock %}
+        <div class="pc-ads">
+            <div class="ad-cell">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- under-contents -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:336px;height:280px"
+                     data-ad-client="ca-pub-7611852587780285"
+                     data-ad-slot="2549446453"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="ad-cell">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- under-contents -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:336px;height:280px"
+                     data-ad-client="ca-pub-7611852587780285"
+                     data-ad-slot="2549446453"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        <div class="sp-ads">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- under-contents-sp -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:250px"
+                 data-ad-client="ca-pub-7611852587780285"
+                 data-ad-slot="9095507652"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <br>{% block button %}{% endblock button %}
+        <br>
+        <div style="padding-bottom: 10px; text-align: center;">
+            <div class="fb-page" data-href="https://www.facebook.com/instachecker/" data-tabs="timeline"　data-small-header="false"
+                data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <blockquote cite="https://www.facebook.com/instachecker/" class="fb-xfbml-parse-ignore">
+                <a href="https://www.facebook.com/instachecker/">InstaChecker</a>
+                </blockquote>
+            </div>
+        </div>
+        {% block bug %}{% endblock bug %}
+    </div>
+    <footer class="mobile-small">
+        <p><a href="{{info['url']}}/privacy">Privacy Policy</a> | <a href="{{info['url']}}/contact">Contact Us</a></p>
+        <p>
+            &copy;
+            <script>
+                var date = new Date();
+                var year = date.getFullYear();
+                document.write("2016-" + year);
+            </script>
+            <a href="https://www.mktia.com">mktia</a>.
+        </p>
+    </footer>
+</body>
+</html>
