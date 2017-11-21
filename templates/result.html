@@ -1,95 +1,157 @@
-{% extends "base.html" %}
-{% block title %}Result{% endblock %}
-{% block head %}
-    {{ super() }}
+<html lang="ja">
+<head>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> 
+    <![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{info['description']}}">
+    <meta name="theme-color" content="#d82e86">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="{{info['description']}}">
+    <meta property="og:title" content="{{info['name']}}">
+    <meta property="og:url" content="{{info['url']}}">
+    <meta property="og:image" content="{{info['url']}}/static/ogp-image.png">
+    <meta property="og:site_name" content="{{info['name']}}">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="{{info['description']}}">
+    <meta name="twitter:title" content="{{info['name']}}">
+    <meta name="twitter:url" content="{{info['url']}}">
+    <meta name="twitter:image" content="{{info['url']}}/static/ogp-image.png">
+    <meta name="twitter:domain" content="{{info['url']}}">
+    <meta name="twitter:creator" content="@instachecker">
+    <meta name="twitter:site" content="@instachecker">
+    <title>Result | {{info['name']}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css" type="text/css">
+    <link rel="stylesheet" href="../static/icon-style.css" type="text/css">    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="apple-touch-icon" href="../static/apple-touch-icon/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../static/apple-touch-icon/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../static/apple-touch-icon/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../static/apple-touch-icon/touch-icon-ipad-retina.png">
     {# CSS は style.css を基本とし、ページ特有のものは head タグ内に記載 #}
     <style>
-        /* this page only*/
-        .ad-card {
-            margin: 5px auto 5px;
-            width: 320px;
-        }
-        .card {
-            border: 1px solid #dbdbdb;
-            border-radius: 5px;
-            display: block;
-            font-size: 20px;
-            height: 54px;
-            margin: 5px auto 5px;
-            width: 320px;
-        }
-        .card img {
-            border-radius: 30px;
-            float: left;
-            height: 44px;
-            margin: 5px 8px;
-            width: 44px;
-        }
-        .result {
-            margin-bottom: 40px;
-        }
-        .result a {
-            text-decoration: none;
-        }
-        .user_name {
-            color: #555;
-            font-family: 'Open Sans' sans-serif;
-            font-size: 16px;
-            //margin: 8px 60px;
-        }
-        #index {
-            font-size: 14px;
-            margin: 10px 0 30px;
-            text-align: center;
-        }
-        #index a {
-            border-bottom: 1px dotted;
-            color: #000;
-            text-decoration: none;
-        }
+    /* this page only*/
+    .ad-card {
+        margin: 5px auto 5px;
+        width: 320px;
+    }
+    .card {
+        border: 1px solid #dbdbdb;
+        border-radius: 5px;
+        display: block;
+        font-size: 20px;
+        height: 54px;
+        margin: 5px auto 5px;
+        width: 320px;
+    }
+    .card img {
+        border-radius: 30px;
+        float: left;
+        height: 44px;
+        margin: 5px 8px;
+        width: 44px;
+    }
+    .result {
+        margin-bottom: 40px;
+    }
+    .result a {
+        text-decoration: none;
+    }
+    .user_name {
+        color: #555;
+        font-family: 'Open Sans' sans-serif;
+        font-size: 16px;
+        //margin: 8px 60px;
+    }
+    #index {
+        font-size: 14px;
+        margin: 10px 0 30px;
+        text-align: center;
+    }
+    #index a {
+        border-bottom: 1px dotted;
+        color: #000;
+        text-decoration: none;
+    }
+    #list {
+        padding: 0 100px;
+    }
+    #logout {
+        border: 1px solid #999;
+        border-radius: 5px;
+        color: #999;
+        display: block;
+        margin: 0 auto 20px;
+        //margin: -59px 150px 23px auto;
+        padding: 3px;
+        text-align: center;
+        text-decoration: none;
+        width: 200px;
+    }
+    /* smartphone or tablet */
+    @media screen and (max-width: 1100px) {
         #list {
-            padding: 0 100px;
+            padding: 10px;
         }
         #logout {
-            border: 1px solid #999;
-            border-radius: 5px;
-            color: #999;
-            display: block;
-            margin: 0 auto 20px;
-            //margin: -59px 150px 23px auto;
-            padding: 3px;
-            text-align: center;
-            text-decoration: none;
-            width: 200px;
+            //margin: -59px 5px 23px auto;
         }
-        /* smartphone or tablet */
-        @media screen and (max-width: 1100px) {
-            #list {
-                padding: 10px;
-            }
-            #logout {
-                //margin: -59px 5px 23px auto;
-            }
+    }
+    @media screen and (max-width: 320px) {
+        .card {
+            width: 300px;
         }
-        @media screen and (max-width: 320px) {
-            .card {
-                width: 300px;
-            }
-        }
+    }
     </style>
-{% endblock %}
-{% block content %}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-87972162-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-7611852587780285",
+        enable_page_level_ads: true
+      });
+    </script>
+</head>
+<body>
+    <header>
+        <div id="title">
+            <div>
+                <img src="../static/logo.jpg">
+                <h1><a href="{{info['url']}}">{{info['name']}}</a></h1>
+            </div>
+        </div>
+    </header>
+    <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8&appId=555469271313885";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <div id="main">
         <section id="list">
-            <h2>Result</h2>
+            <h2>実行結果</h2>
             <p id="index"><a href="#not_fd">片思いしてる</a> | <a href="#not_fs">片思いされてる</a> | <a href="#ff">両思い</a></p>
             <div class="result" style="margin-bottom: 40px;">
-                <h3 id="not_fd">片思いしているユーザー： {% if {{result['not_fd']['num']}} == 1 %}1 person{% elif {{result['not_fd']['num']}} > 1 %} {{result['not_fd']['num']}}People{% else %}None{% endif %}</h3>
-                <p class="en">- You are following but not followed.</p>
+                <h3 id="not_fd">片思いしているユーザー：{{result['not_fd']['num']}}人</h3>
+                {# <p class="en">- You are following but not followed.</p> #}
                 {% if result['not_fd']['num'] != 0 %}
                     {% for i in range(result['not_fd']['num']) %}
                         <a class="card" href="http://www.instagram.com/{{result['not_fd']['name'][i]}}/" target="_blank"><img src="{{result['not_fd']['img'][i]}}"><p class="user_name">{{result['not_fd']['name'][i]}}</p></a>
-                        {# 20 アカウント表示ごとに広告 #}
-                        {% if (i != 0) and (i + 1 % 20 == 0)  %}
+                        {# 10 アカウント表示ごとに広告 #}
+                        {% if (i != 0) and (i % 9 == 0)  %}
                             <div class="ad-card">
                                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                                 <ins class="adsbygoogle"
@@ -107,7 +169,6 @@
                     {% endfor %}
                 {% else %}
                     <p>あなたが片思いしているユーザーはいませんでした。</p>
-                    <p>No one unfollows you.</p>
                 {% endif %}
             </div>
             <p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
@@ -136,12 +197,12 @@
                 </script>
             </div>
             <div class="result">
-                <h3 id="not_fs">片思いされているユーザー： {% if {{result['not_fs']['num']}} == 1 %}1 person{% elif {{result['not_fs']['num']}} > 1 %} {{result['not_fs']['num']}}People{% else %}None{% endif %}</h3>
-                <p class="en">- You are not following but followed.</p>
+                <h3 id="not_fs">片思いされているユーザー：{{result['not_fs']['num']}}人</h3>
+                {# <p class="en">- You are not following but followed.</p> #}
                 {% if result['not_fs']['num'] != 0 %}
                     {% for i in range(result['not_fs']['num']) %}
                         <a class="card" href="http://www.instagram.com/{{result['not_fs']['name'][i]}}/" target="_blank"><img src="{{result['not_fs']['img'][i]}}"><p class="user_name">{{result['not_fs']['name'][i]}}</p></a>
-                        {% if (i != 0) and (i　+ 1  % 20 == 0)  %}
+                        {% if (i != 0) and (i % 9 == 0)  %}
                             <div class="ad-card">
                                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                                 <ins class="adsbygoogle"
@@ -159,7 +220,6 @@
                     {% endfor %}
                 {% else %}
                     <p>あなたに片思いしているユーザーはいませんでした。</p>
-                    <p>You follow all your followers.</p>
                 {% endif %}
             </div>
             <p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
@@ -186,8 +246,8 @@
                 </script>
             </div>
             <div class="result">
-                <h3 id="ff">両思い中のユーザー： {% if {{result['fs_and_fd']['num']}} == 1 %}1 person{% elif {{result['fs_and_fd']['num']}} > 1 %} {{result['fs_and_fd']['num']}}People{% else %}None{% endif %}</h3>
-                <p class="en">- You are following and followed.</p>
+                <h3 id="ff">両思い中のユーザー：{{result['fs_and_fd']['num']}}人</h3>
+                {# <p class="en">- You are following and followed.</p> #}
                 {% if result['fs_and_fd']['num'] != 0 %}
                     {% for i in range(result['fs_and_fd']['num']) %}
                         <a class="card" href="http://www.instagram.com/{{result['fs_and_fd']['name'][i]}}/" target="_blank"><img src="{{result['fs_and_fd']['img'][i]}}"><p class="user_name">{{result['fs_and_fd']['name'][i]}}</p></a>
@@ -209,7 +269,6 @@
                     {% endfor %}
                 {% else %}
                     <p>両思い中のユーザーはいませんでした。</p>
-                    <p>You don't follow all your followers.</p>
                 {% endif %}
             </div>
             <a id="logout" href="https://www.instagram.com/accounts/logout" target="_blank" rel="nofollow">ログアウト</a>
@@ -223,5 +282,58 @@
             </div>
         </section>
         <br>
-        <p class="mobile-small" style="line-height: 0; text-align: center;">Sponsore link</p>
-{% endblock %}
+        <p class="mobile-small" style="line-height: 0; text-align: center;">スポンサーリンク</p>
+        <div class="pc-ads">
+            <div class="ad-cell">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- under-contents -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:336px;height:280px"
+                     data-ad-client="ca-pub-7611852587780285"
+                     data-ad-slot="2549446453"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <div class="ad-cell">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- under-contents -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:336px;height:280px"
+                     data-ad-client="ca-pub-7611852587780285"
+                     data-ad-slot="2549446453"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        <div class="sp-ads">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- under-contents-sp -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:250px"
+                 data-ad-client="ca-pub-7611852587780285"
+                 data-ad-slot="9095507652"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <br>
+        <div style="padding-bottom: 10px; text-align: center;">
+            <div class="fb-page" data-href="https://www.facebook.com/instachecker/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/instachecker/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/instachecker/">InstaChecker</a></blockquote></div>
+        </div> 
+    </div>
+    <footer class="mobile-small">
+        <p><a href="{{info['url']}}/privacy">Privacy Policy</a> | <a href="{{info['url']}}/contact">Contact Us</a></p>
+        <p>
+            &copy;
+            <script>
+                var date = new Date();
+                var year = date.getFullYear();
+                document.write("2016-" + year);
+            </script>
+            <a href="https://www.mktia.com">mktia</a>.
+        </p>
+    </footer>
+</body>
+</html>
