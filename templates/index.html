@@ -10,13 +10,12 @@
             function changeLanguage() {
                 var num = document.getElementById('lang').selectedIndex;
                 var val = document.getElementById('lang').options[num].value;
-                /*
                 var redirect_url = {{info['URL']}} + '/' + val + location.search;
                 if (document.referrer) {
                     var referrer = "referrer=" + encodeURIComponent(document.referrer);
                     redirect_url = redirect_url + (location.search ? '&' : '?') + referrer;
-                }*/
-                location.href = 'http://localhost:5000' + '/' + val;
+                }
+                location.href = redirect_url;
             }
         </script>
         <div id="select_lang">
