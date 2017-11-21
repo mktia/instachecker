@@ -79,29 +79,9 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
     <div id="main">
-        <script>
-            window.onload = function() {
-                let filter = document.getElementById('lang');
-                filter.addEventListener('change', changeLanguage);
-            }
-            
-            function changeLanguage() {
-                var num = document.getElementById('lang').selectedIndex;
-                var val = document.getElementById('lang').options[num].value;
-                /*
-                var redirect_url = {{info['URL']}} + '/' + val + location.search;
-                if (document.referrer) {
-                    var referrer = "referrer=" + encodeURIComponent(document.referrer);
-                    redirect_url = redirect_url + (location.search ? '&' : '?') + referrer;
-                }*/
-                location.href = 'http://localhost:5000' + '/' + val;
-            }
-        </script>
-        language: <select name="lang" id="lang" onchange="changeLanguage();">
-            <option selected disabled>Choose</option>
-            <option value="id">Indonesian</option>
-            <option value="">Japanese</option>
-        </select>{% block content %}{% endblock %}
+        {% 複数テンプレート継承非対応のため、継承先の各言語トップページに選択ボタンを設置すること %}
+        {% block lang %}{% endblock lang %}
+        {% block content %}{% endblock %}
         <div class="pc-ads">
             <div class="ad-cell">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
