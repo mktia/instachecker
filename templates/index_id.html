@@ -10,6 +10,33 @@
         }
     </style>
 {% endblock %}
+{% block lang %}
+        <script>
+            window.onload = function() {
+                let filter = document.getElementById('lang');
+                filter.addEventListener('change', changeLanguage);
+            }
+            
+            function changeLanguage() {
+                var num = document.getElementById('lang').selectedIndex;
+                var val = document.getElementById('lang').options[num].value;
+                /*
+                var redirect_url = {{info['URL']}} + '/' + val + location.search;
+                if (document.referrer) {
+                    var referrer = "referrer=" + encodeURIComponent(document.referrer);
+                    redirect_url = redirect_url + (location.search ? '&' : '?') + referrer;
+                }*/
+                location.href = 'http://localhost:5000' + '/' + val;
+            }
+        </script>
+        <div id="select_lang">
+            language: <select name="lang" id="lang" onchange="changeLanguage();">
+                <option selected disabled>Choose</option>
+                <option value="id">Indonesian</option>
+                <option value="">Japanese</option>
+            </select>
+        </div>
+{% endblock lang %}
 {% block content %}
         <section>
             <div class="welcome">
@@ -21,7 +48,7 @@
             <p>Mari menikmati kehidupan instagram yang nyaman!</p>
         </section>
         <section>
-            <p>Share</p>
+            <p>Let's share with your friends!</p>
             <div class="sns">
                 <a class="btn-tw" href="http://twitter.com/share?text={{info['description']}}&url={{info['url']}}"
                     target="blank" rel="nofollow"><span class="sns-icon icon-twitter"></span><span class="btn-text">twitter</span></a>
