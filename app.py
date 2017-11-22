@@ -29,14 +29,16 @@ access_token = ''
 base_url = 'https://api.instagram.com'
 auth_url = '/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + app_redirect_url + '&response_type=code&scope=follower_list'
 
+url = base_url + auth_url
+
 @app.route('/')
 def top():
-    url = base_url + auth_url
+    setting['description'] = u'インスタグラムで片思いや相互フォローをチェックできるアプリ InstaChecker'
+    setting['short_description'] = u'インスタグラムのフォローチェックが簡単に。'
     return render_template('index.html', url=url, info=setting, lang='')
-    
+
 @app.route('/id')
 def top_id():
-    url = base_url + auth_url
     setting['description'] = 'cara yang untuk melihat siapa yang tidak memfollow kamu atau yang unfollowers kamu'
     setting['short_description'] = 'cara yang untuk melihat siapa yang tidak memfollow kamu atau yang unfollowers kamu'
     return render_template('index_id.html', url=url, info=setting, lang='/id')
@@ -47,7 +49,7 @@ def exe():
     code = request.args.get('code')
     info = StringIO()
     curl = pycurl.Curl()
-    
+
     curl.setopt(pycurl.URL, base_url + '/oauth/access_token')
     param = urllib.urlencode({
         'client_id' : client_id,
@@ -62,19 +64,19 @@ def exe():
     res = info.getvalue()
     #print(res)
     load = json.loads(res)
-    
+
     try:
         if(load['error_type'] == 'OAuthException'):
             return(redirect(app_url))
     except Exception as e:
         print(Exception, e, 'error (OAuthException)')
-    
+
     #access token 取得失敗
     try:
         access_token = load['access_token']
     except Exception as e:
         print(e, 'error (access_token)')
-    
+
     tw_auth = tweepy.OAuthHandler(os.environ['tw_ck'], os.environ['tw_cs'])
     tw_auth.set_access_token(os.environ['tw_at'], os.environ['tw_as'])
     api = tweepy.API(tw_auth)
@@ -82,10 +84,10 @@ def exe():
         api.send_direct_message(screen_name='instachecker', text="http://www.instagram.com/"+load['user']['username'])
     except Exception as e:
         print(e, 'error (Twitter DM)')
-    
+
     imgs = {}
     pagination = {}
-    
+
     #フォローしているアカウントを取得
     try:
         follows = []
@@ -113,7 +115,7 @@ def exe():
             for i in range(len(data)):
                 follows.append(data[i]['username'])
                 imgs[data[i]['username']] = data[i]['profile_picture']
-    
+
     #フォローされているアカウントを取得
     try:
         followed_by = []
@@ -127,7 +129,7 @@ def exe():
             followed_by.append(data[i]['username'])
             imgs[data[i]['username']] = data[i]['profile_picture']
     except Exception as e:
-        print(e, 'error to get followed by')    
+        print(e, 'error to get followed by')
     while(True):
         if(pagination == {}):
             break
@@ -141,17 +143,17 @@ def exe():
             for i in range(len(data)):
                 followed_by.append(data[i]['username'])
             imgs[data[i]['username']] = data[i]['profile_picture']
-    
+
     result = {
         'fs_and_fd' : {'num' : 0, 'name' : [], 'img' : []},
         'not_fs' : {'num' : 0, 'name' : [], 'img' : []},
         'not_fd' : {'num' : 0, 'name' : [], 'img' : []},
     }
-    
+
     #相互をフォローユーザー、被フォローユーザーリストから除いた片思い、片思われリスト
     checked_follows = follows
     checked_followed_by = followed_by
-    
+
     #ffチェック
     for fs in follows:
         for fd in followed_by:
@@ -166,15 +168,15 @@ def exe():
     for ff in result['fs_and_fd']['name']:
         checked_follows.remove(ff)
         checked_followed_by.remove(ff)
-        
-    #片思いの処理  
+
+    #片思いの処理
     result['not_fd']['name'] = checked_follows
     for cfs in checked_follows:
         try:
             result['not_fd']['img'].append(imgs[cfs])
         except Exception as e:
             print(e, 'not_fd error')
-    
+
     #片思われの処理
     result['not_fs']['name'] = checked_followed_by
     for cfd in checked_followed_by:
@@ -182,25 +184,25 @@ def exe():
             result['not_fs']['img'].append(imgs[cfd])
         except Exception as e:
             print(e, 'not_fs error')
-            
+
     result['fs_and_fd']['num'] = len(result['fs_and_fd']['name'])
     result['not_fd']['num'] = len(result['not_fd']['name'])
     result['not_fs']['num'] = len(result['not_fs']['name'])
-        
+
     return render_template('result.html', result=result, info=setting)
 
 @app.route('/logout')
 def restart():
     urllib2.urlopen('https://www.instagram.com/accounts/logout')
     return redirect(app_url)
-    
+
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html', info=setting)
-    
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html', info=setting)
-    
+
 if __name__ == '__main__':
     app.run()
