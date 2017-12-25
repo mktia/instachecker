@@ -141,10 +141,6 @@ def exe():
         'not_fd' : {'num' : 0, 'name' : [], 'img' : []},
     }
 
-    #相互をフォローユーザー、被フォローユーザーリストから除いた片思い、片思われリスト
-    checked_follows = follows
-    checked_followed_by = followed_by
-
     #ffチェック
     for fs in follows:
         for fd in followed_by:
@@ -153,28 +149,22 @@ def exe():
                 try:
                     result['fs_and_fd']['img'].append(imgs[fs])
                 except Exception as e:
-                    print(e, fs_and_fd)
+                    print(e, 'error to check fs_and_fd')
+                followed_by.remove(fd)
                 break
+        else:
+            result['not_fd']['name'].append(fs)
+            try:
+                result['not_fd']['img'].append(imgs[fs])
+            except Exception as e:
+                print(e, 'error to check not_fd')
 
-    for ff in result['fs_and_fd']['name']:
-        checked_follows.remove(ff)
-        checked_followed_by.remove(ff)
-
-    #片思いの処理
-    result['not_fd']['name'] = checked_follows
-    for cfs in checked_follows:
+    for i in followed_by:
+        result['not_fs']['name'].append(i)
         try:
-            result['not_fd']['img'].append(imgs[cfs])
+            result['not_fs']['img'].append(imgs[i])
         except Exception as e:
-            print(e, 'not_fd error')
-
-    #片思われの処理
-    result['not_fs']['name'] = checked_followed_by
-    for cfd in checked_followed_by:
-        try:
-            result['not_fs']['img'].append(imgs[cfd])
-        except Exception as e:
-            print(e, 'not_fs error')
+            print(e, 'error to check not_fs')
 
     result['fs_and_fd']['num'] = len(result['fs_and_fd']['name'])
     result['not_fd']['num'] = len(result['not_fd']['name'])
