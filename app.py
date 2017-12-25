@@ -2,7 +2,6 @@
 import json
 import os
 import pycurl
-import tweepy
 import urllib
 import urllib2
 from flask import Flask, render_template, request, session, redirect, url_for
@@ -62,28 +61,20 @@ def exe():
     curl.setopt(curl.WRITEFUNCTION, info.write)
     curl.perform()
     res = info.getvalue()
-    #print(res)
     load = json.loads(res)
 
     try:
         if(load['error_type'] == 'OAuthException'):
             return(redirect(app_url))
     except Exception as e:
-        print(Exception, e, 'error (OAuthException)')
+        # It's not error
+        pass
 
     #access token 取得失敗
     try:
         access_token = load['access_token']
     except Exception as e:
         print(e, 'error (access_token)')
-
-    tw_auth = tweepy.OAuthHandler(os.environ['tw_ck'], os.environ['tw_cs'])
-    tw_auth.set_access_token(os.environ['tw_at'], os.environ['tw_as'])
-    api = tweepy.API(tw_auth)
-    try:
-        api.send_direct_message(screen_name='instachecker', text="http://www.instagram.com/"+load['user']['username'])
-    except Exception as e:
-        print(e, 'error (Twitter DM)')
 
     imgs = {}
     pagination = {}
